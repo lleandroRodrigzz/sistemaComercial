@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-export default function Menu(props) {
+export default function Menu({onSelectForm}) {
 
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
@@ -13,10 +13,10 @@ export default function Menu(props) {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <NavDropdown title="Cadastros" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Clientes</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Fornecedores</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Produtos</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.4">Categorias</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => onSelectForm('cliente')}>Clientes</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => onSelectForm('fornecedor')}>Fornecedores</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => onSelectForm('usuario')}>Usuários</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => onSelectForm('categoria')}>Categorias</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Operações" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Compras</NavDropdown.Item>
