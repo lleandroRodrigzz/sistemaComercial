@@ -1,5 +1,3 @@
-/*import { useState } from 'react';*/
-import { Alert } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -9,7 +7,6 @@ import Row from 'react-bootstrap/Row';
 export default function FormCadastroCliente(props) {
     return (
         <>
-            <Alert className='text-center' variant='primary' style={{fontSize: "42px"}}>Tela de Cadastro de Cliente</Alert>
             <Form>
                 <Row className="mb-3">
                     <Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -65,7 +62,7 @@ export default function FormCadastroCliente(props) {
                         <Form.Label>CPF</Form.Label>
                         <Form.Control type="text" placeholder="Digite seu CPF aqui" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Digite um CPF valido
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Row>

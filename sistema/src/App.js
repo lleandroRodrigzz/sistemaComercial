@@ -1,37 +1,26 @@
-import { useState } from 'react';
-import Pagina from "./componentes/layouts/Pagina";
-import Menu from './componentes/layouts/Menu';
-import TelaCadastro from "./componentes/layouts/TelaCadastro";
-import FormCadastroCliente from "./componentes/layouts/FormCadastroCliente";
-import FormCadastroFornecedor from "./componentes/layouts/FormCadastroFornecedor";
-import FormCadastroUsuario from "./componentes/layouts/FormCadastroUsuario";
-import FormCadastroCategoria from "./componentes/layouts/FormCadastroCategoria";
+import TelaCadastroCliente from './componentes/layouts/TelaCadastroCliente';
+import TelaCadastroFornecedor from './componentes/layouts/TelaCadastroFornecedor';
+import TelaCadastroCategoria from './componentes/layouts/TelaCadastroCategoria';
+import TelaCadastroUsuario from './componentes/layouts/TelaCadastroUsuario';
+import TelaMenu from "./componentes/layouts/TelaMenu";
+import Tela404 from "./componentes/layouts/Tela404";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  const [FormAtivado, FormSetAtivado] = useState("cliente");
-  const renderizarFormulario = () => {
-    switch (FormAtivado) {
-      case "cliente":
-        return <FormCadastroCliente />;
-      case "fornecedor":
-        return <FormCadastroFornecedor />;
-      case "usuario":
-        return <FormCadastroUsuario />;
-      case "categoria":
-        return <FormCadastroCategoria />;
-      default:
-        return <FormCadastroCliente />;
-    }
-  };
-
   return (
     <div className="App">
-      <Pagina>
-        <Menu onSelectForm={FormSetAtivado}/>
-        <TelaCadastro>
-          {renderizarFormulario()}
-        </TelaCadastro>
-      </Pagina>
+      <BrowserRouter>
+        { //A ordem das rotas é importante 
+        }
+        <Routes>
+          <Route path="/cliente" element={<TelaCadastroCliente/>}/>
+          <Route path="/fornecedor" element={<TelaCadastroFornecedor/>}/>
+          <Route path="/usuario" element={<TelaCadastroUsuario/>}/>
+          <Route path="/categoria" element={<TelaCadastroCategoria/>}/>
+          <Route path="/" element={<TelaMenu/>} />
+          <Route path="*" element={<Tela404/>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
