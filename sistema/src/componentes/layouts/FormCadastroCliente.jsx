@@ -18,15 +18,6 @@ export default function FormCadastroCliente(props) {
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group as={Col} md="4" controlId="validationCustom02">
-                        <Form.Label>Sobrenome</Form.Label>
-                        <Form.Control
-                            required
-                            type="text"
-                            placeholder="Digite seu sobrenome aqui"
-                        />
-                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    </Form.Group>
                     <Form.Group as={Col} md="4" controlId="validationCustomUsername">
                         <Form.Label>Email</Form.Label>
                         <InputGroup hasValidation>
@@ -66,7 +57,18 @@ export default function FormCadastroCliente(props) {
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Row>
-                <Button variant="outline-primary" type="submit">Cadastrar Cliente</Button>
+                <Row className='mt-2 mb-2'>
+
+                <Col md={1}>
+                <Button variant="primary" type="submit">Cadastrar</Button>
+                </Col>
+
+                <Col md={{offset:1}}>
+                <Button variant="primary" type="submit" onClick={() => {
+                    props.setExibirTabela(true);
+                }}>Voltar</Button>
+                </Col>
+            </Row>
             </Form>
         </>
     )
