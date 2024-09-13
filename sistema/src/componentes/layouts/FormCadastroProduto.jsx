@@ -3,12 +3,47 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
+import { useState } from 'react';
 
 export default function FormCadProdutos(props) {
+    const[produto, setProduto] = useState({
+        codigo:0,
+        descricao:"",
+        precoCusto:0,
+        precoVenda:0,
+        qtdEstoque:0,
+        urlImagem:"",
+        dataValidade:""
+    });
+    const[formValidado, setFormValidado] = useState(false);
+
+    function manipularSubmissao(evento){
+        const form = evento.currentTarget;
+        if(form.checkValidity()){
+            //cadastrar
+            props.listaDeProdutos.push(produto);
+            //exibe tabela com produto incluido
+            props.setExibirTabela(true);
+        }
+        else{
+            setFormValidado(true);
+        }
+        evento.preventDefault();
+        evento.stopPropagation();
+    }
+
+    function manipularMudanca(evento){
+        const elemento = evento.target.name;
+        const valor = evento.target.value;
+        setProduto({...produto, [elemento]:valor});
+        //console.log(`componente: ${elemento} : ${valor}`)
+
+    }
+
     return (
-        <Form noValidate>
+        <Form noValidate validated={formValidado} onSubmit={manipularSubmissao}>
             <Row className="mb-4">
-                <Form.Group as={Col} md="4" controlId="codigo">
+                <Form.Group as={Col} md="4">
                     <Form.Label>Código</Form.Label>
                     <Form.Control
                         style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff"}}
@@ -16,13 +51,15 @@ export default function FormCadProdutos(props) {
                         type="text"
                         id="codigo"
                         name="codigo"
+                        value={produto.codigo}
+                        onChange={manipularMudanca}
                         placeholder="Digite o codigo aqui"
                     />
                     <Form.Control.Feedback type='invalid'>Por favor, informe o código do produto!</Form.Control.Feedback>
                 </Form.Group>
             </Row>
             <Row className="mb-4">
-                <Form.Group as={Col} md="12" controlId="descricao">
+                <Form.Group as={Col} md="12">
                     <Form.Label>Descrição</Form.Label>
                     <Form.Control
                         style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
@@ -30,13 +67,15 @@ export default function FormCadProdutos(props) {
                         type="text"
                         id="descricao"
                         name="descricao"
+                        value={produto.descricao}
+                        onChange={manipularMudanca}
                         placeholder="Digite a descrição aqui"
                     />
                     <Form.Control.Feedback type="invalid">Por favor, informe a descrição do produto!</Form.Control.Feedback>
                 </Form.Group>
             </Row>
             <Row className="mb-4">
-                <Form.Group as={Col} md="4" controlId="precoCusto">
+                <Form.Group as={Col} md="4">
                     <Form.Label>Preço de Custo:</Form.Label>
                     <InputGroup hasValidation>
                         <InputGroup.Text id="precoCusto" style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
@@ -45,6 +84,8 @@ export default function FormCadProdutos(props) {
                             type="text"
                             id="precoCusto"
                             name="precoCusto"
+                            value={produto.precoCusto}
+                            onChange={manipularMudanca}
                             aria-describedby="precoCusto"
                             placeholder="Digite o preço de custo aqui"
                             required
@@ -63,6 +104,8 @@ export default function FormCadProdutos(props) {
                             type="text"
                             id="precoVenda"
                             name="precoVenda"
+                            value={produto.precoVenda}
+                            onChange={manipularMudanca}
                             placeholder="Digite o preço de venda aqui"
                             aria-describedby="precoVenda"
                             required
@@ -72,7 +115,7 @@ export default function FormCadProdutos(props) {
                         </Form.Control.Feedback>
                     </InputGroup>
                 </Form.Group>
-                <Form.Group as={Col} md="4" controlId="qtdEstoque">
+                <Form.Group as={Col} md="4">
                     <Form.Label>Qtd em estoque:</Form.Label>
                     <InputGroup hasValidation>
                         <InputGroup.Text id="qtdEstoque" style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}>+</InputGroup.Text>
@@ -81,6 +124,8 @@ export default function FormCadProdutos(props) {
                             type="text"
                             id="qtdEstoque"
                             name="qtdEstoque"
+                            value={produto.qtdEstoque}
+                            onChange={manipularMudanca}
                             placeholder="Digite a quantidade de estoque aqui"
                             aria-describedby="qtdEstoque"
                             required
@@ -92,29 +137,33 @@ export default function FormCadProdutos(props) {
                 </Form.Group>
             </Row>
             <Row className="mb-4">
-                <Form.Group as={Col} md="12" controlId="urlImagem">
+                <Form.Group as={Col} md="12">
                     <Form.Label>Url da imagem:</Form.Label>
                     <Form.Control
                         style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
                         required
                         type="text"
                         id="urlImagem"
-                        placeholder="Cole o url aqui"
                         name="urlImagem"
+                        value={produto.urlImagem}
+                        onChange={manipularMudanca}
+                        placeholder="Cole o url aqui"
                     />
                     <Form.Control.Feedback type="invalid">Por favor, informe a url da imagem do produto!</Form.Control.Feedback>
                 </Form.Group>
             </Row>
             <Row className="mb-4">
-                <Form.Group as={Col} md="12" controlId="dataValidade">
+                <Form.Group as={Col} md="12">
                     <Form.Label>Válido até:</Form.Label>
                     <Form.Control
                         style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
                         required
                         type="text"
                         id="dataValidade"
-                        placeholder="XX/XX/XXXX"
                         name="dataValidade"
+                        value={produto.dataValidade}
+                        onChange={manipularMudanca}
+                        placeholder="XX/XX/XXXX"
                     />
                     <Form.Control.Feedback type="invalid">Por favor, informe a data de validade do produto!</Form.Control.Feedback>
                 </Form.Group>
