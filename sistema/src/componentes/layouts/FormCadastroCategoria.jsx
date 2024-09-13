@@ -10,7 +10,7 @@ export default function FormCadastroCategoria(props) {
                 <Form.Group as={Col} md="6" controlId="validationCustom01">
                     <Form.Label>Nome da Categoria</Form.Label>
                     <Form.Control
-                        style={{ borderColor: "#C53115" }}
+                        style={{ borderColor: "#C53115" , backgroundColor: "#e36d6d" }}
                         required
                         type="text"
                         placeholder="Digite o nome da categoria aqui"
@@ -19,11 +19,13 @@ export default function FormCadastroCategoria(props) {
                 </Form.Group>
                 <Form.Group as={Col} md="6" controlId="validationCustom05">
                     <Form.Label>Tipo de Categoria</Form.Label>
-                    <Form.Select as={Col} md="5" style={{ borderColor: "#C53115" }}>
+                    <Form.Select as={Col} md="5" style={{ borderColor: "#C53115", backgroundColor: "#e36d6d"}}>
                         <option disabled>Selecione o Tipo de Categoria</option>
                         <option value="1">Alimenticio</option>
-                        <option value="2">Mecânica</option>
-                        <option value="3">Materiais de Construção</option>
+                        <option value="2">Mecanico</option>
+                        <option value="3">Tecnologia</option>
+                        <option value="4">Educação</option>
+                        <option value="4">Vestuario</option>
                     </Form.Select>
                 </Form.Group>
             </Row>

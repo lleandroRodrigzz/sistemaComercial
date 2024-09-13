@@ -12,7 +12,7 @@ export default function FormCadastroFornecedor(props) {
                     <Form.Group as={Col} md="4" controlId="validationCustom01">
                         <Form.Label>Nome</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#999431" }}
+                            style={{ borderColor: "#999431", backgroundColor: "#e8e35f" }}
                             required
                             type="text"
                             placeholder="Digite o nome do fornecedor aqui"
@@ -22,7 +22,7 @@ export default function FormCadastroFornecedor(props) {
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>Categoria</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#999431" }}
+                            style={{ borderColor: "#999431", backgroundColor: "#e8e35f"  }}
                             required
                             type="text"
                             placeholder="Digite a categoria aqui"
@@ -32,9 +32,9 @@ export default function FormCadastroFornecedor(props) {
                     <Form.Group as={Col} md="4" controlId="validationCustomUsername">
                         <Form.Label>Email</Form.Label>
                         <InputGroup hasValidation>
-                            <InputGroup.Text id="inputGroupPrepend" style={{ borderColor: "#999431" }}>@</InputGroup.Text>
+                            <InputGroup.Text id="inputGroupPrepend" style={{ borderColor: "#999431" , backgroundColor: "#e8e35f" }}>@</InputGroup.Text>
                             <Form.Control
-                                style={{ borderColor: "#999431" }}
+                                style={{ borderColor: "#999431" , backgroundColor: "#e8e35f" }}
                                 type="text"
                                 placeholder="Digite seu email aqui"
                                 aria-describedby="inputGroupPrepend"
@@ -50,7 +50,7 @@ export default function FormCadastroFornecedor(props) {
                     <Form.Group as={Col} md="6" controlId="validationCustom03">
                         <Form.Label>Cidade</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#999431" }}
+                            style={{ borderColor: "#999431" , backgroundColor: "#e8e35f" }}
                             type="text"
                             placeholder="Digite sua cidade aqui"
                             required
@@ -62,7 +62,7 @@ export default function FormCadastroFornecedor(props) {
                     <Form.Group as={Col} md="3" controlId="validationCustom04">
                         <Form.Label>Estado</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#999431" }}
+                            style={{ borderColor: "#999431" , backgroundColor: "#e8e35f" }}
                             type="text"
                             placeholder="Digite seu estado aqui"
                             required
@@ -74,7 +74,7 @@ export default function FormCadastroFornecedor(props) {
                     <Form.Group as={Col} md="3" controlId="validationCustom05">
                         <Form.Label>CNPJ</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#999431" }}
+                            style={{ borderColor: "#999431" , backgroundColor: "#e8e35f" }}
                             type="text"
                             placeholder="Digite o CNPJ aqui"
                             required

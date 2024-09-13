@@ -11,7 +11,7 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4" controlId="codigo">
                     <Form.Label>Código</Form.Label>
                     <Form.Control
-                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
+                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff"}}
                         required
                         type="text"
                         id="codigo"

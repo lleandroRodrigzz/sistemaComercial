@@ -3,7 +3,7 @@ import { Container, Button, Table } from 'react-bootstrap';
 export default function TabelaCategoria(props) {
     return (
         <>
-            <Container>
+            <Container className='text-center'>
                 <Button className='mb-3' variant='danger'
                     onClick={() => {
                         props.setExibirTabela(false);

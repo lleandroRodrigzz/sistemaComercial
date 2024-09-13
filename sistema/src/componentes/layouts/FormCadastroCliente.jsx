@@ -12,7 +12,7 @@ export default function FormCadastroCliente(props) {
                     <Form.Group as={Col} md="4" controlId="validationCustom01">
                         <Form.Label>Nome</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#0B2CA1" }}
+                            style={{backgroundColor: "#f0f8ff" ,borderColor: "#0B2CA1" }}
                             required
                             type="text"
                             placeholder="Digite seu nome aqui"
@@ -24,7 +24,7 @@ export default function FormCadastroCliente(props) {
                         <InputGroup hasValidation>
                             <InputGroup.Text id="inputGroupPrepend" style={{ borderColor: "#0B2CA1" }}>@</InputGroup.Text>
                             <Form.Control
-                                style={{ borderColor: "#0B2CA1" }}
+                                style={{ borderColor: "#0B2CA1",backgroundColor: "#f0f8ff" }}
                                 type="text"
                                 placeholder="Digite seu email aqui"
                                 aria-describedby="inputGroupPrepend"
@@ -40,7 +40,7 @@ export default function FormCadastroCliente(props) {
                     <Form.Group as={Col} md="6" controlId="validationCustom03">
                         <Form.Label>Cidade</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#0B2CA1" }}
+                            style={{ borderColor: "#0B2CA1",backgroundColor: "#f0f8ff" }}
                             type="text"
                             placeholder="Digite sua cidade aqui"
                             required
@@ -52,7 +52,7 @@ export default function FormCadastroCliente(props) {
                     <Form.Group as={Col} md="3" controlId="validationCustom04">
                         <Form.Label>Estado</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#0B2CA1" }}
+                            style={{ borderColor: "#0B2CA1",backgroundColor: "#f0f8ff" }}
                             type="text"
                             placeholder="Digite seu estado aqui"
                             required
@@ -64,7 +64,7 @@ export default function FormCadastroCliente(props) {
                     <Form.Group as={Col} md="3" controlId="validationCustom05">
                         <Form.Label>CPF</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#0B2CA1" }}
+                            style={{ borderColor: "#0B2CA1",backgroundColor: "#f0f8ff" }}
                             type="text"
                             placeholder="Digite seu CPF aqui"
                             required
