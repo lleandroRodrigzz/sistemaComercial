@@ -6,63 +6,102 @@ import Row from 'react-bootstrap/Row';
 import { useState } from 'react';
 
 export default function FormCadProdutos(props) {
-    const[produto, setProduto] = useState({
-        codigo:0,
-        descricao:"",
-        precoCusto:0,
-        precoVenda:0,
-        qtdEstoque:0,
-        urlImagem:"",
-        dataValidade:""
-    });
-    const[formValidado, setFormValidado] = useState(false);
+    
+    const prodVazio = {
+        codigo: 0,
+        descricao: "",
+        precoCusto: 0,
+        precoVenda: 0,
+        qtdEstoque: 0,
+        urlImagem: "",
+        dataValidade: ""
+    };
 
-    function manipularSubmissao(evento){
+    const [formValidado, setFormValidado] = useState(false);
+    const estadoProduto = props.produtoSelecionado;
+    const [produto, setProduto] = useState(estadoProduto);
+
+    function manipularSubmissao(evento) {
         const form = evento.currentTarget;
-        if(form.checkValidity()){
-            //cadastrar
-            props.listaDeProdutos.push(produto);
-            //exibe tabela com produto incluido
+        if (form.checkValidity()) {
+            if (!props.modoEdicao) {
+                //cadastrar produto
+                props.setListaDeProdutos([...props.listaDeProdutos, produto]); // Array vazio está recebendo o conteúdo da lista espalhada mais o produto
+                // Exibir tabela com o produto incluído
+                //props.setExibirTabela(true);
+            }
+            else {
+                props.setListaDeProdutos([...props.listaDeProdutos.filter((item) => item.codigo !== produto.codigo), produto]);
+                props.setModoEdicao(false);
+                props.setProdutoSelecionado(prodVazio);
+            }
             props.setExibirTabela(true);
+            setProduto(prodVazio);
+            setFormValidado(false);
         }
-        else{
+        else {
             setFormValidado(true);
         }
         evento.preventDefault();
         evento.stopPropagation();
     }
 
-    function manipularMudanca(evento){
+    function manipularMudanca(evento) {
         const elemento = evento.target.name;
         const valor = evento.target.value;
-        setProduto({...produto, [elemento]:valor});
-        //console.log(`componente: ${elemento} : ${valor}`)
-
+        setProduto({ ...produto, [elemento]: valor });
+        //console.log(`componente: ${elemento} : ${valor}`);
     }
 
     return (
-        <Form noValidate validated={formValidado} onSubmit={manipularSubmissao}>
+        <Form validated={formValidado} onSubmit={manipularSubmissao}>
             <Row className="mb-4">
-                <Form.Group as={Col} md="4">
-                    <Form.Label>Código</Form.Label>
-                    <Form.Control
-                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff"}}
-                        required
-                        type="text"
-                        id="codigo"
-                        name="codigo"
-                        value={produto.codigo}
-                        onChange={manipularMudanca}
-                        placeholder="Digite o codigo aqui"
-                    />
-                    <Form.Control.Feedback type='invalid'>Por favor, informe o código do produto!</Form.Control.Feedback>
-                </Form.Group>
+                {
+                    props.modoEdicao ?
+                        <fieldset disabled>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label>Código</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    id="codigo"
+                                    name="codigo"
+                                    value={produto.codigo}
+                                    onChange={manipularMudanca}
+                                    placeholder="Digite o codigo aqui"
+                                    style={props.modoEdicao ? {
+                                        borderColor: "#007bff",
+                                        /*backgroundColor: '#e9ecef'*/
+                                        cursor: 'not-allowed',
+                                        opacity: 0.7,
+                                        pointerEvents: 'none'
+                                    } : {}}
+                                />
+                                <Form.Control.Feedback type='invalid'>Por favor, informe o código do produto!</Form.Control.Feedback>
+                            </Form.Group>
+                        </fieldset> :
+
+                        <Form.Group as={Col} md="4">
+                            <Form.Label>Código</Form.Label>
+                            <Form.Control
+                                style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff" }}
+                                required
+                                type="text"
+                                id="codigo"
+                                name="codigo"
+                                value={produto.codigo}
+                                onChange={manipularMudanca}
+                                placeholder="Digite o codigo aqui"
+                            />
+                            <Form.Control.Feedback type='invalid'>Por favor, informe o código do produto!</Form.Control.Feedback>
+                        </Form.Group>
+                }
             </Row>
             <Row className="mb-4">
                 <Form.Group as={Col} md="12">
                     <Form.Label>Descrição</Form.Label>
                     <Form.Control
-                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
+                        style={{ /*backgroundColor: "#f0f8ff"*/ borderColor: "#007bff", color: "#000" }}
                         required
                         type="text"
                         id="descricao"
@@ -78,9 +117,9 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4">
                     <Form.Label>Preço de Custo:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="precoCusto" style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
+                        <InputGroup.Text id="precoCusto" style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
                         <Form.Control
-                            style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
+                            style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
                             type="text"
                             id="precoCusto"
                             name="precoCusto"
@@ -98,9 +137,9 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4" controlId="precoVenda">
                     <Form.Label>Preço de Venda:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="precoVenda" style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
+                        <InputGroup.Text id="precoVenda" style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
                         <Form.Control
-                            style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
+                            style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
                             type="text"
                             id="precoVenda"
                             name="precoVenda"
@@ -118,9 +157,9 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4">
                     <Form.Label>Qtd em estoque:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="qtdEstoque" style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}>+</InputGroup.Text>
+                        <InputGroup.Text id="qtdEstoque" style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>+</InputGroup.Text>
                         <Form.Control
-                            style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
+                            style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
                             type="text"
                             id="qtdEstoque"
                             name="qtdEstoque"
@@ -140,7 +179,7 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="12">
                     <Form.Label>Url da imagem:</Form.Label>
                     <Form.Control
-                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
+                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
                         required
                         type="text"
                         id="urlImagem"
@@ -156,7 +195,7 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="12">
                     <Form.Label>Válido até:</Form.Label>
                     <Form.Control
-                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
+                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
                         required
                         type="text"
                         id="dataValidade"
@@ -171,12 +210,20 @@ export default function FormCadProdutos(props) {
             <Row className='mt-2 mb-2'>
 
                 <Col md={1}>
-                    <Button variant="info" type="submit">Cadastrar</Button>
+                    <Button variant="info" type="submit">
+                        {
+                            props.modoEdicao ?
+                                "Alterar" :
+                                "Cadastrar"
+                        }
+                    </Button>
                 </Col>
 
                 <Col md={{ offset: 1 }}>
                     <Button variant="info" type="submit" onClick={() => {
                         props.setExibirTabela(true);
+                        props.setModoEdicao(false);
+                        props.setProdutoSelecionado(prodVazio);
                     }}>Voltar</Button>
                 </Col>
             </Row>

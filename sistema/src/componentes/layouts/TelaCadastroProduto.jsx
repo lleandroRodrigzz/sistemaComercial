@@ -1,12 +1,25 @@
 import { Alert } from "react-bootstrap";
-import FormCadProdutos from "./FormCadastroProduto";
+import FormCadastroProduto from "./FormCadastroProduto";
 import Pagina from "./Pagina";
 import { useState } from "react";
-import TabelaProdutos from "../tabelas/TabelaProduto";
+import TabelaProduto from "../tabelas/TabelaProduto";
 import { produtos } from "../dados/mockCategorias";
 
 export default function TelaCadastroProduto(props) {
+    
     const [exibirTabela, setExibirTabela] = useState(true);
+    const [listaDeProdutos, setListaDeProdutos] = useState(produtos);
+    const [modoEdicao, setModoEdicao] = useState(false);
+    const [produtoSelecionado, setProdutoSelecionado] = useState({
+        codigo: 0,
+        descricao: "",
+        precoCusto: "",
+        precoVenda: "",
+        qtdEstoque: "",
+        urlImagem: "",
+        dataValidade: ""
+    });
+
     return (
         <div>
             <Pagina>
@@ -15,8 +28,21 @@ export default function TelaCadastroProduto(props) {
                 </Alert>
                 {
                     exibirTabela ?
-                    <TabelaProdutos listaDeProdutos={produtos} setExibirTabela={setExibirTabela} /> :
-                    <FormCadProdutos listaDeProdutos={produtos} setExibirTabela={setExibirTabela} />
+                        <TabelaProduto listaDeProdutos={listaDeProdutos}
+                            modoEdicao={modoEdicao}
+                            setModoEdicao={setModoEdicao}
+                            produtoSelecionado={produtoSelecionado}
+                            setProdutoSelecionado={setProdutoSelecionado}
+                            setListaDeProdutos={setListaDeProdutos}
+                            setExibirTabela={setExibirTabela} /> :
+
+                        <FormCadastroProduto listaDeProdutos={listaDeProdutos}
+                            produtoSelecionado={produtoSelecionado}
+                            setProdutoSelecionado={setProdutoSelecionado}
+                            modoEdicao={modoEdicao}
+                            setModoEdicao={setModoEdicao}
+                            setListaDeProdutos={setListaDeProdutos}
+                            setExibirTabela={setExibirTabela} />
                 }
             </Pagina>
         </div>

@@ -121,7 +121,7 @@ export const produtos = [
         "precoCusto": 10.00,
         "precoVenda": 20.00,
         "qtdEstoque": 100,
-        "urlImagem": "",
+        "urlImagem": "https://images.tcdn.com.br/img/img_prod/947450/camiseta_basic_strong_preto_malha_pesada_1053_1_03680dfa0aa04d53f062a170f8527091.jpg",
         "dataValidade": "31/12/2999"
     },
     {
@@ -130,25 +130,25 @@ export const produtos = [
         "precoCusto": 18.00,
         "precoVenda": 36.00,
         "qtdEstoque": 50,
-        "urlImagem": "",
+        "urlImagem": "https://http2.mlstatic.com/D_NQ_NP_999286-MLB54557477213_032023-O.webp",
         "dataValidade": "31/12/2999"
     },
     {
         "codigo": 3,
-        "descricao": "Celular X",
-        "precoCusto": 500.00,
-        "precoVenda": 1000.00,
+        "descricao": "Iphone 14",
+        "precoCusto": 3250.00,
+        "precoVenda": 4500.00,
         "qtdEstoque": 30,
-        "urlImagem": "",
+        "urlImagem": "https://a-static.mlcdn.com.br/800x560/apple-iphone-14-128gb-meia-noite-61-12mp-ios-5g/magazineluiza/237184000/c2b18b81c92ac8e90f502be85d9f4169.jpg",
         "dataValidade": "31/12/2025"
     },
     {
         "codigo": 4,
-        "descricao": "Notebook Z",
-        "precoCusto": 1500.00,
-        "precoVenda": 3000.00,
+        "descricao": "Notebook Acer Nitro 5",
+        "precoCusto": 3000.00,
+        "precoVenda": 7550.00,
         "qtdEstoque": 15,
-        "urlImagem": "",
+        "urlImagem": "https://a-static.mlcdn.com.br/800x560/notebook-acer-nitro-5-an515-58-54uh-ci5-12a-gen-windows-11-home-8gb-512gb-rtx-3050-15-6-full-hd/aceroficial/1132/d4f4a47524a6f330ce8a7fc8e2e3280d.jpeg",
         "dataValidade": "31/12/2025"
     }
 ];

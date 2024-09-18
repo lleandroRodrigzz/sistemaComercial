@@ -12,7 +12,7 @@ export default function FormCadastroUsuario(props) {
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label>Nome de Usuario</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#175c27" , backgroundColor: "#95e88b" }}
+                            style={{ borderColor: "#175c27" , /*backgroundColor: "#95e88b"*/ }}
                             required
                             type="text"
                             placeholder="Digite o nome de Usuario aqui"
@@ -22,9 +22,9 @@ export default function FormCadastroUsuario(props) {
                     <Form.Group as={Col} md="6" controlId="validationCustomUsername">
                         <Form.Label>Email</Form.Label>
                         <InputGroup hasValidation>
-                            <InputGroup.Text id="inputGroupPrepend" style={{ borderColor: "#175c27" , backgroundColor: "#95e88b" }}>@</InputGroup.Text>
+                            <InputGroup.Text id="inputGroupPrepend" style={{ borderColor: "#175c27" , /*backgroundColor: "#95e88b"*/ }}>@</InputGroup.Text>
                             <Form.Control
-                                style={{ borderColor: "#175c27" , backgroundColor: "#95e88b" }}
+                                style={{ borderColor: "#175c27" , /*backgroundColor: "#95e88b"*/ }}
                                 type="text"
                                 placeholder="Digite seu email aqui"
                                 aria-describedby="inputGroupPrepend"
@@ -37,10 +37,10 @@ export default function FormCadastroUsuario(props) {
                     </Form.Group>
                 </Row>
                 <Row className="mb-3">
-                    <Form.Group as={Col} md="6" controlId="validationCustom03">
+                    <Form.Group as={Col} md="6">
                         <Form.Label>Senha</Form.Label>
                         <Form.Control
-                            style={{ borderColor: "#175c27", backgroundColor: "#95e88b"  }}
+                            style={{ borderColor: "#175c27", /*backgroundColor: "#95e88b"*/  }}
                             type="text"
                             placeholder="Digite sua senha aqui"
                             required
@@ -49,9 +49,9 @@ export default function FormCadastroUsuario(props) {
                             Digite uma senha valida.
                         </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group as={Col} md="6" controlId="validationCustom05">
+                    <Form.Group as={Col} md="6">
                         <Form.Label>Tipo de Usuario</Form.Label>
-                        <Form.Select as={Col} md="5" style={{ borderColor: "#175c27", backgroundColor: "#95e88b"  }}>
+                        <Form.Select as={Col} md="5" style={{ borderColor: "#175c27", /*backgroundColor: "#95e88b"*/  }}>
                             <option disabled>Selecione o Tipo de Usuario</option>
                             <option value="1">Administrador</option>
                             <option value="2">Comum</option>

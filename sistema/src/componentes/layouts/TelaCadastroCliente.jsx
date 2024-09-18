@@ -6,7 +6,18 @@ import Pagina from "./Pagina";
 import { useState } from "react";
 
 export default function TelaCadastroCliente(props) {
-    const[exibirTabela, setExibirTabela] = useState(true);
+    
+    const [exibirTabela, setExibirTabela] = useState(true);
+    const [listaDeClientes, setListaDeClientes] = useState(clientes);
+    const [modoEdicao, setModoEdicao] = useState(false);
+    const [clienteSelecionado, setClienteSelecionado] = useState({
+        nome: "",
+        email: "",
+        cidade: "",
+        estado: "",
+        cpf: ""
+    });
+
     return (
         <div>
             <Pagina>
@@ -15,8 +26,21 @@ export default function TelaCadastroCliente(props) {
                 </Alert>
                 {
                     exibirTabela ?
-                    <TabelaCliente listaDeClientes={clientes} setExibirTabela={setExibirTabela}/> :
-                    <FormCadastroCliente setExibirTabela={setExibirTabela}/>
+                        <TabelaCliente listaDeClientes={listaDeClientes}
+                            modoEdicao={modoEdicao}
+                            setModoEdicao={setModoEdicao}
+                            clienteSelecionado={clienteSelecionado}
+                            setClienteSelecionado={setClienteSelecionado}
+                            setListaDeClientes={setListaDeClientes}
+                            setExibirTabela={setExibirTabela} /> :
+
+                        <FormCadastroCliente listaDeClientes={listaDeClientes}
+                            clienteSelecionado={clienteSelecionado}
+                            setClienteSelecionado={setClienteSelecionado}
+                            modoEdicao={modoEdicao}
+                            setModoEdicao={setModoEdicao}
+                            setListaDeClientes={setListaDeClientes}
+                            setExibirTabela={setExibirTabela} />
                 }
             </Pagina>
         </div>
