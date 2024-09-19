@@ -91,25 +91,25 @@ export const usuarios = [
     {
         "nomeUsuario": "lleandro_rodrigzz",
         "emailUsuario": "leandromarcoscasse@gmail.com",
-        "senhaUsuario": "**********",
+        "senhaUsuario": "leandro064",
         "tipoUsuario": "Administrador"
     },
     {
         "nomeUsuario": "mate006644",
         "emailUsuario": "mateus064444@gmail.com",
-        "senhaUsuario": "*********",
+        "senhaUsuario": "mateLoko1234",
         "tipoUsuario": "Comum"
     },
     {
         "nomeUsuario": "julia_guest",
         "emailUsuario": "julia_guest@empresa.com",
-        "senhaUsuario": "**********",
+        "senhaUsuario": "juliafofinha_123",
         "tipoUsuario": "Convidado"
     },
     {
         "nomeUsuario": "carlos_vendas",
         "emailUsuario": "carlos_vendas@empresa.com",
-        "senhaUsuario": "*********",
+        "senhaUsuario": "vendasSecretas",
         "tipoUsuario": "Comum"
     }
 ];
