@@ -7,7 +7,7 @@ import { useState } from 'react';
 export default function FormCadastroCategoria(props) {
 
     const categoriaVazia = {
-        id: 0,
+        id: "",
         nomeCat: "",
         tipo: ""
     }
@@ -51,6 +51,7 @@ export default function FormCadastroCategoria(props) {
                             <fieldset disabled>
                                 <Form.Label>ID da Categoria</Form.Label>
                                 <Form.Control
+                                    style={{ borderColor: 'red', /*backgroundColor: "#95e88b"*/ }}
                                     required
                                     type="number"
                                     id='id'
@@ -64,6 +65,7 @@ export default function FormCadastroCategoria(props) {
                             <>
                                 <Form.Label>ID da Categoria</Form.Label>
                                 <Form.Control
+                                    style={{ borderColor: 'red', /*backgroundColor: "#95e88b"*/ }}
                                     required
                                     type="number"
                                     id='id'
@@ -79,6 +81,7 @@ export default function FormCadastroCategoria(props) {
                 <Form.Group as={Col} md="6">
                     <Form.Label>Nome da Categoria</Form.Label>
                     <Form.Control
+                        style={{ borderColor: 'red', /*backgroundColor: "#95e88b"*/ }}
                         required
                         type="text"
                         id='nomeCat'
@@ -94,13 +97,15 @@ export default function FormCadastroCategoria(props) {
                 <Form.Group as={Col} md="6">
                     <Form.Label>Tipo de Categoria</Form.Label>
                     <Form.Select
+                        style={{ borderColor: 'red', /*backgroundColor: "#95e88b"*/ }}
                         id='tipo'
                         name='tipo'
                         value={categoria.tipo}
                         onChange={manipularMudanca}
                         required
+                        placeholder="Escolha a categoria"
                     >
-                        <option selected disabled>Selecione o Tipo de Categoria</option>
+                        <option disabled selected value="">Selecione o Tipo de Categoria</option>
                         <option value="Alimenticio">Alimenticio</option>
                         <option value="Mecanico">Mecanico</option>
                         <option value="Tecnologia">Tecnologia</option>
