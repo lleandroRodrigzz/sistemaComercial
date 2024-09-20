@@ -1,21 +1,26 @@
 export const categorias = [
     {
+        "id": 1,
         "nomeCat": "Carnes",
         "tipo": "Alimenticio"
     },
     {
+        "id": 2,
         "nomeCat": "Camiseta",
         "tipo": "Vestuario"
     },
     {
+        "id": 3,
         "nomeCat": "Eletrônicos",
         "tipo": "Tecnologia"
     },
     {
+        "id": 4,
         "nomeCat": "Livros",
         "tipo": "Educação"
     },
     {
+        "id": 5,
         "nomeCat": "Serviços Mecânicos",
         "tipo": "Mecânico"
     }

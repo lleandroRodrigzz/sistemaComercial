@@ -35,7 +35,7 @@ export default function TabelaUsuario(props) {
                                     <tr>
                                         <td>{usuario.nomeUsuario}</td>
                                         <td>{usuario.emailUsuario}</td>
-                                        <td>{usuario.senhaUsuario}</td>
+                                        <td>{"*************"}</td>
                                         <td>{usuario.tipoUsuario}</td>
                                         <td>
                                             <Button onClick={() => {

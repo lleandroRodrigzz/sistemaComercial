@@ -8,11 +8,11 @@ import { useState } from 'react';
 export default function FormCadProdutos(props) {
     
     const prodVazio = {
-        codigo: 0,
+        codigo: "",
         descricao: "",
-        precoCusto: 0,
-        precoVenda: 0,
-        qtdEstoque: 0,
+        precoCusto: "",
+        precoVenda: "",
+        qtdEstoque: "",
         urlImagem: "",
         dataValidade: ""
     };

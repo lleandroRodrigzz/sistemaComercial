@@ -11,7 +11,7 @@ export default function TelaCadastroProduto(props) {
     const [listaDeProdutos, setListaDeProdutos] = useState(produtos);
     const [modoEdicao, setModoEdicao] = useState(false);
     const [produtoSelecionado, setProdutoSelecionado] = useState({
-        codigo: 0,
+        codigo: "",
         descricao: "",
         precoCusto: "",
         precoVenda: "",
