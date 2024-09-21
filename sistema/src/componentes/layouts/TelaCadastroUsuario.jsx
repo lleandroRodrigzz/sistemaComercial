@@ -21,7 +21,7 @@ export default function TelaCadastroUsuario(props) {
         <div>
             <Pagina>
                 <Alert className='text-center' variant='success' style={{ fontSize: "42px" }}>
-                    <h2>Cadastro de Usuario</h2>
+                    <h2>Cadastro de Usuarios</h2>
                 </Alert>
                 {
                     exibirTabela ?

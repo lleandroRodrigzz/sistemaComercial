@@ -19,7 +19,7 @@ export default function TelaCadastroCategoria(props) {
         <div>
             <Pagina>
                 <Alert className='text-center' variant='danger' style={{ fontSize: "42px" }}>
-                    <h2>Cadastro de Categoria</h2>
+                    <h2>Cadastro de Categorias</h2>
                 </Alert>
                 {
                     exibirTabela ?

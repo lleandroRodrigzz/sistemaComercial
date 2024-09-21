@@ -24,7 +24,7 @@ export default function TelaCadastroProduto(props) {
         <div>
             <Pagina>
                 <Alert className='text-center' variant='info' style={{ fontSize: "42px" }}>
-                    <h2>Cadastro de Produto</h2>
+                    <h2>Cadastro de Produtos</h2>
                 </Alert>
                 {
                     exibirTabela ?

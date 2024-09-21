@@ -157,3 +157,51 @@ export const produtos = [
         "dataValidade": "31/12/2025"
     }
 ];
+
+export const entregadores = [
+    {
+        id: "1",
+        nome: "Carlos Mendes",
+        cnh: "12345678900",
+        fotoCnh: "https://horacampinas.com.br/wp-content/uploads/2021/12/1075700-df_jfrcz_abr_20170509_0458.jpg",
+        veiculo: "Moto",
+        placaV: "ABC-1234",
+        capacidadeMax: "30kg"
+    },
+    {
+        id: "2",
+        nome: "Ana Souza",
+        cnh: "98765432100",
+        fotoCnh: "https://files.tecnoblog.net/wp-content/uploads/2018/01/cnh-smartphone.jpg",
+        veiculo: "Carro",
+        placaV: "XYZ-9876",
+        capacidadeMax: "100kg"
+    },
+    {
+        id: "3",
+        nome: "João Pereira",
+        cnh: "45678912300",
+        fotoCnh: "https://www.radarlitoral.com.br/upload/upnoticia/1601757653.png",
+        veiculo: "Van",
+        placaV: "DEF-4567",
+        capacidadeMax: "500kg"
+    },
+    {
+        id: "4",
+        nome: "Maria Oliveira",
+        cnh: "32165498700",
+        fotoCnh: "https://files.tecnoblog.net/wp-content/uploads/2018/01/cnh-smartphone.jpg",
+        veiculo: "Caminhão",
+        placaV: "GHI-7890",
+        capacidadeMax: "1000kg"
+    },
+    {
+        id: "5",
+        nome: "Paulo Lima",
+        cnh: "65478932100",
+        fotoCnh: "https://plasticovirtual.com.br/wp-content/uploads/2017/12/cnh.jpg",
+        veiculo: "Bicicleta",
+        placaV: "JKL-1234",
+        capacidadeMax: "10kg"
+    }
+];

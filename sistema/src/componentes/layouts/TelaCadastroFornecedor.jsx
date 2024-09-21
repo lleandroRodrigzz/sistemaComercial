@@ -21,7 +21,7 @@ export default function TelaCadastroFornecedor(props) {
         <div>
             <Pagina>
                 <Alert className='text-center' variant='warning' style={{ fontSize: "42px", color: "#3d3a1b" }}>
-                    <h2>Cadastro de Fornecedor</h2>
+                    <h2>Cadastro de Fornecedores</h2>
                 </Alert>
                 {
                     exibirTabela ?
