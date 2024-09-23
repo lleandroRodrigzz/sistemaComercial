@@ -31,7 +31,7 @@ export default function Menu(props) {
                             <NavDropdown.Item href="#" as={Link} to='*'>Vendas</NavDropdown.Item>
                             <NavDropdown.Item href="#" as={Link} to='*'>Compras</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="#" as={Link} to='*'>Sobre</Nav.Link>
+                        <Nav.Link href="#" as={Link} to='/sobre'>Sobre</Nav.Link>
                         <Nav.Link href="#" as={Link} to='*'>Sair</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

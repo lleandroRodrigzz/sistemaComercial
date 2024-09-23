@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import { useState } from 'react';
 
 export default function FormCadProdutos(props) {
-    
+
     const prodVazio = {
         codigo: "",
         descricao: "",
@@ -56,46 +56,21 @@ export default function FormCadProdutos(props) {
     return (
         <Form validated={formValidado} onSubmit={manipularSubmissao}>
             <Row className="mb-4">
-                {
-                    props.modoEdicao ?
-                        <fieldset disabled>
-                            <Form.Group as={Col} md="4">
-                                <Form.Label>Código</Form.Label>
-                                <Form.Control
-                                    required
-                                    type="text"
-                                    id="codigo"
-                                    name="codigo"
-                                    value={produto.codigo}
-                                    onChange={manipularMudanca}
-                                    placeholder="Digite o codigo aqui"
-                                    style={props.modoEdicao ? {
-                                        borderColor: "#007bff",
-                                        /*backgroundColor: '#e9ecef'*/
-                                        cursor: 'not-allowed',
-                                        opacity: 0.7,
-                                        pointerEvents: 'none'
-                                    } : {}}
-                                />
-                                <Form.Control.Feedback type='invalid'>Por favor, informe o código do produto!</Form.Control.Feedback>
-                            </Form.Group>
-                        </fieldset> :
-
-                        <Form.Group as={Col} md="4">
-                            <Form.Label>Código</Form.Label>
-                            <Form.Control
-                                style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff" }}
-                                required
-                                type="text"
-                                id="codigo"
-                                name="codigo"
-                                value={produto.codigo}
-                                onChange={manipularMudanca}
-                                placeholder="Digite o codigo aqui"
-                            />
-                            <Form.Control.Feedback type='invalid'>Por favor, informe o código do produto!</Form.Control.Feedback>
-                        </Form.Group>
-                }
+                <Form.Group as={Col} md="4">
+                    <Form.Label>Código</Form.Label>
+                    <Form.Control
+                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff" }}
+                        required
+                        type="text"
+                        id="codigo"
+                        name="codigo"
+                        value={produto.codigo}
+                        onChange={manipularMudanca}
+                        disabled={props.modoEdicao}
+                        placeholder="Digite o codigo aqui"
+                    />
+                    <Form.Control.Feedback type='invalid'>Por favor, informe o código do produto!</Form.Control.Feedback>
+                </Form.Group>
             </Row>
             <Row className="mb-4">
                 <Form.Group as={Col} md="12">
