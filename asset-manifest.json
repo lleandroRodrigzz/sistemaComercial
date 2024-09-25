@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/sistemaComercial/static/css/main.d221dc40.css",
+    "main.js": "/sistemaComercial/static/js/main.2c375e6b.js",
+    "static/media/pagina404.png": "/sistemaComercial/static/media/pagina404.4bf0805d8d55a31c5142.png",
+    "index.html": "/sistemaComercial/index.html",
+    "main.d221dc40.css.map": "/sistemaComercial/static/css/main.d221dc40.css.map",
+    "main.2c375e6b.js.map": "/sistemaComercial/static/js/main.2c375e6b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d221dc40.css",
+    "static/js/main.2c375e6b.js"
+  ]
+}
