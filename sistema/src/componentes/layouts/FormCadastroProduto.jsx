@@ -1,9 +1,11 @@
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';         //importar o useEffect
+import { consultarCategoria } from '../../servicos/servicoCategoria';    //importar a funcao de consultar de servicosCategoria
+import toast, { Toaster } from 'react-hot-toast';   //importar o react toast
 
 export default function FormCadProdutos(props) {
 
@@ -20,6 +22,24 @@ export default function FormCadProdutos(props) {
     const [formValidado, setFormValidado] = useState(false);
     const estadoProduto = props.produtoSelecionado;
     const [produto, setProduto] = useState(estadoProduto);
+    const [categorias, setCategorias] = useState([]);
+    const [temCategoria, setTemCategoria] = useState(false);
+
+    useEffect(() => {
+        consultarCategoria().then((resultado) => {
+            if (Array.isArray(resultado)) {
+                setCategorias(resultado);
+                setTemCategoria(true);
+            }
+            else {
+                toast.error("Não foi possivel carregar as categorias");
+            }
+        }).catch((erro) => {
+            setTemCategoria(false);
+            toast.error("Não foi possivel carregar as categorias");
+        });
+
+    }, []);  //didMount
 
     function manipularSubmissao(evento) {
         const form = evento.currentTarget;
@@ -59,7 +79,7 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4">
                     <Form.Label>Código</Form.Label>
                     <Form.Control
-                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff" }}
+                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff" }}
                         required
                         type="text"
                         id="codigo"
@@ -76,7 +96,7 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="12">
                     <Form.Label>Descrição</Form.Label>
                     <Form.Control
-                        style={{ /*backgroundColor: "#f0f8ff"*/ borderColor: "#007bff", color: "#000" }}
+                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
                         required
                         type="text"
                         id="descricao"
@@ -92,9 +112,9 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4">
                     <Form.Label>Preço de Custo:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="precoCusto" style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
+                        <InputGroup.Text id="precoCusto" style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
                         <Form.Control
-                            style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                            style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
                             type="text"
                             id="precoCusto"
                             name="precoCusto"
@@ -112,9 +132,9 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4" controlId="precoVenda">
                     <Form.Label>Preço de Venda:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="precoVenda" style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
+                        <InputGroup.Text id="precoVenda" style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
                         <Form.Control
-                            style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                            style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
                             type="text"
                             id="precoVenda"
                             name="precoVenda"
@@ -132,9 +152,9 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4">
                     <Form.Label>Qtd em estoque:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="qtdEstoque" style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>+</InputGroup.Text>
+                        <InputGroup.Text id="qtdEstoque" style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}>+</InputGroup.Text>
                         <Form.Control
-                            style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                            style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
                             type="text"
                             id="qtdEstoque"
                             name="qtdEstoque"
@@ -154,7 +174,7 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="12">
                     <Form.Label>Url da imagem:</Form.Label>
                     <Form.Control
-                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
                         required
                         type="text"
                         id="urlImagem"
@@ -167,10 +187,10 @@ export default function FormCadProdutos(props) {
                 </Form.Group>
             </Row>
             <Row className="mb-4">
-                <Form.Group as={Col} md="12">
+                <Form.Group as={Col} md="4">
                     <Form.Label>Válido até:</Form.Label>
                     <Form.Control
-                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
                         required
                         type="text"
                         id="dataValidade"
@@ -181,11 +201,36 @@ export default function FormCadProdutos(props) {
                     />
                     <Form.Control.Feedback type="invalid">Por favor, informe a data de validade do produto!</Form.Control.Feedback>
                 </Form.Group>
+                <Form.Group as={Col} md={7}>
+                    <Form.Label>Categoria:</Form.Label>
+                    <Form.Select
+                        style={{ backgroundColor: "#f0f8ff", borderColor: "#007bff", color: "#000" }}
+                        id='categoria'
+                        name='categoria'
+                        required
+                    >
+                        <option selected disabled>Selecione uma categoria</option>
+                        {
+                            /*Criar em tempo de execução as categorias existentes no banco de dados*/
+                            categorias.map((categoria) => {
+                                return <option value={categoria.codigo}>
+                                    {categoria.descricao}
+                                </option>
+                            })
+                        }
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group as={Col} md={1}>
+                    {
+                        !temCategoria ? <Spinner className='mt-4' animation="border" variant="info" />
+                            : ""
+                    }
+                </Form.Group>
             </Row>
             <Row className='mt-2 mb-2'>
 
                 <Col md={1}>
-                    <Button variant="info" type="submit">
+                    <Button type="submit" variant="info" disabled={!temCategoria}>
                         {
                             props.modoEdicao ?
                                 "Alterar" :
@@ -202,7 +247,9 @@ export default function FormCadProdutos(props) {
                     }}>Voltar</Button>
                 </Col>
             </Row>
+            {
+                !temCategoria ? <Toaster position='top-right'></Toaster> : ""
+            }
         </Form>
-
     );
 }
