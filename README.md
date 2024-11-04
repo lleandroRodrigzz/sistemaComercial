@@ -1,2 +1,2 @@
-Desenvolvido por lleandroRodrigzz e Dartin17
+Desenvolvido por lleandroRodrigzz
 Desenvolvendo um sistema para empresa ACME.
