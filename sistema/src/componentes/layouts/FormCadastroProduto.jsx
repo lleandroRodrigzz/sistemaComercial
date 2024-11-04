@@ -1,43 +1,89 @@
-import { Button } from 'react-bootstrap';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Row from 'react-bootstrap/Row';
-import { useState } from 'react';
+import { Button, Col, Form, InputGroup, Row, Spinner } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { consultarCategoria } from "../servicos/servicoCategoria.js"
+import { gravarProduto } from "../servicos/servicoProduto.js"
+
+import toast, { Toaster } from "react-hot-toast";
 
 export default function FormCadProdutos(props) {
 
-    const prodVazio = {
-        codigo: "",
-        descricao: "",
-        precoCusto: "",
-        precoVenda: "",
-        qtdEstoque: "",
-        urlImagem: "",
-        dataValidade: ""
-    };
-
+    const [produto, setProduto] = useState(props.produtoSelecionado);
     const [formValidado, setFormValidado] = useState(false);
-    const estadoProduto = props.produtoSelecionado;
-    const [produto, setProduto] = useState(estadoProduto);
+    const [categorias, setCategorias] = useState([]);
+    const [temCategorias, setTemCategorias] = useState(false);
+
+    useEffect(() => {
+        consultarCategoria().then((resultado) => {
+            if (Array.isArray(resultado)) {
+                setCategorias(resultado);
+                setTemCategorias(true);
+            }
+            else {
+                toast.error("Não foi possível carregar as categorias");
+            }
+        }).catch((erro) => {
+            setTemCategorias(false);
+            toast.error("Não foi possível carregar as categorias");
+        });
+
+    }, []); //didMount
+
+    function selecionarCategoria(evento) {
+        setProduto({...produto,
+                        categoria: {
+                            codigo: evento.currentTarget.value
+                        }
+        });
+    }
 
     function manipularSubmissao(evento) {
         const form = evento.currentTarget;
         if (form.checkValidity()) {
+
             if (!props.modoEdicao) {
-                //cadastrar produto
-                props.setListaDeProdutos([...props.listaDeProdutos, produto]); // Array vazio está recebendo o conteúdo da lista espalhada mais o produto
-                // Exibir tabela com o produto incluído
-                //props.setExibirTabela(true);
+                //cadastrar o produto
+                gravarProduto(produto)
+                .then((resultado) => {
+                    if (resultado.status) {
+                        //exibir tabela com o produto incluído
+                        props.setExibirTabela(true);
+                    }
+                    else {
+                        toast.error(resultado.mensagem);
+                    }
+                });
             }
             else {
-                props.setListaDeProdutos([...props.listaDeProdutos.filter((item) => item.codigo !== produto.codigo), produto]);
+                //editar o produto
+                /*altera a ordem dos registros
+                props.setListaDeProdutos([...props.listaDeProdutos.filter(
+                    (item) => {
+                        return item.codigo !== produto.codigo;
+                    }
+                ), produto]);*/
+
+                //não altera a ordem dos registros
+                props.setListaDeProdutos(props.listaDeProdutos.map((item) => {
+                    if (item.codigo !== produto.codigo)
+                        return item
+                    else
+                        return produto
+                }));
+
+                //voltar para o modo de inclusão
                 props.setModoEdicao(false);
-                props.setProdutoSelecionado(prodVazio);
+                props.setProdutoSelecionado({
+                    codigo: 0,
+                    descricao: "",
+                    precoCusto: 0,
+                    precoVenda: 0,
+                    qtdEstoque: 0,
+                    urlImagem: "",
+                    dataValidade: ""
+                });
+                props.setExibirTabela(true);
             }
-            props.setExibirTabela(true);
-            setProduto(prodVazio);
-            setFormValidado(false);
+
         }
         else {
             setFormValidado(true);
@@ -50,7 +96,6 @@ export default function FormCadProdutos(props) {
         const elemento = evento.target.name;
         const valor = evento.target.value;
         setProduto({ ...produto, [elemento]: valor });
-        //console.log(`componente: ${elemento} : ${valor}`);
     }
 
     return (
@@ -161,13 +206,13 @@ export default function FormCadProdutos(props) {
                         name="urlImagem"
                         value={produto.urlImagem}
                         onChange={manipularMudanca}
-                        placeholder="Cole o url aqui"
+                        placeholder="Cole a URL da imagem aqui"
                     />
                     <Form.Control.Feedback type="invalid">Por favor, informe a url da imagem do produto!</Form.Control.Feedback>
                 </Form.Group>
             </Row>
             <Row className="mb-4">
-                <Form.Group as={Col} md="12">
+                <Form.Group as={Col} md="6">
                     <Form.Label>Válido até:</Form.Label>
                     <Form.Control
                         style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
@@ -181,28 +226,42 @@ export default function FormCadProdutos(props) {
                     />
                     <Form.Control.Feedback type="invalid">Por favor, informe a data de validade do produto!</Form.Control.Feedback>
                 </Form.Group>
+                <Form.Group as={Col} md={7} className="mb-3">
+                    <Form.Label>Categoria</Form.Label>
+                    <Form.Select id="categoria"
+                                name="categoria"
+                                style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                                onChange={selecionarCategoria}>
+                        <option value="" selected disabled>Selecione uma categoria</option>
+                        {
+                            // Criar em tempo de execução as categorias existentes no banco de dados
+                            categorias.map((categoria) => {
+                                return <option value={categoria.codigo}>
+                                    {categoria.descricao}
+                                </option>;
+                            })
+                        }
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group as={Col} md={1} style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>
+                    {
+                        !temCategorias ? <Spinner className='mt-4' animation="border" variant="success" />
+                            : ""
+                    }
+                </Form.Group>
             </Row>
             <Row className='mt-2 mb-2'>
-
                 <Col md={1}>
-                    <Button variant="info" type="submit">
-                        {
-                            props.modoEdicao ?
-                                "Alterar" :
-                                "Cadastrar"
-                        }
-                    </Button>
+                    <Button variant="info" type="submit" disabled={!temCategorias}>{props.modoEdicao ? "Alterar" : "Confirmar"}</Button>
                 </Col>
 
                 <Col md={{ offset: 1 }}>
                     <Button variant="info" type="submit" onClick={() => {
                         props.setExibirTabela(true);
-                        props.setModoEdicao(false);
-                        props.setProdutoSelecionado(prodVazio);
                     }}>Voltar</Button>
                 </Col>
             </Row>
+            <Toaster position="top-center" />
         </Form>
-
     );
 }

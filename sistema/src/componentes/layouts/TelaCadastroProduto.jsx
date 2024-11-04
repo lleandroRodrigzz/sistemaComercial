@@ -1,24 +1,31 @@
 import { Alert } from "react-bootstrap";
 import FormCadastroProduto from "./FormCadastroProduto";
 import Pagina from "./Pagina";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TabelaProduto from "../tabelas/TabelaProduto";
-import { produtos } from "../dados/mockCategorias";
+import { consultarProduto } from "../servicos/servicoProduto";
 
 export default function TelaCadastroProduto(props) {
-    
+
     const [exibirTabela, setExibirTabela] = useState(true);
-    const [listaDeProdutos, setListaDeProdutos] = useState(produtos);
+    const [listaDeProdutos, setListaDeProdutos] = useState([]);
     const [modoEdicao, setModoEdicao] = useState(false);
     const [produtoSelecionado, setProdutoSelecionado] = useState({
-        codigo: "",
+        codigo: 0,
         descricao: "",
-        precoCusto: "",
-        precoVenda: "",
-        qtdEstoque: "",
+        precoCusto: 0,
+        precoVenda: 0,
+        qtdEstoque: 0,
         urlImagem: "",
-        dataValidade: ""
+        dataValidade: "",
+        categoria: {}
     });
+
+    useEffect(() => {
+        consultarProduto().then((lista) => {
+            setListaDeProdutos(lista);
+        });
+    }, []); //listaVazia -> didMount
 
     return (
         <div>
@@ -47,5 +54,4 @@ export default function TelaCadastroProduto(props) {
             </Pagina>
         </div>
     );
-
 }
