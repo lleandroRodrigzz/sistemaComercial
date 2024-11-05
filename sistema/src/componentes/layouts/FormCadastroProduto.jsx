@@ -226,8 +226,8 @@ export default function FormCadProdutos(props) {
                     />
                     <Form.Control.Feedback type="invalid">Por favor, informe a data de validade do produto!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} md={7} className="mb-3">
-                    <Form.Label>Categoria</Form.Label>
+                <Form.Group as={Col} md={5} className="mb-3">
+                    <Form.Label>Categoria:</Form.Label>
                     <Form.Select id="categoria"
                                 name="categoria"
                                 style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
@@ -245,7 +245,7 @@ export default function FormCadProdutos(props) {
                 </Form.Group>
                 <Form.Group as={Col} md={1} style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>
                     {
-                        !temCategorias ? <Spinner className='mt-4' animation="border" variant="success" />
+                        !temCategorias ? <Spinner className='mt-4' animation="border" variant="info" />
                             : ""
                     }
                 </Form.Group>

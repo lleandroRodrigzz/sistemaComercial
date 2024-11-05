@@ -6,7 +6,7 @@ export async function gravarCategoria(categoria) {
         "headers": {
             "Content-Type": "application/json"
         },
-        "Body": JSON.stringify(categoria)
+        "body": JSON.stringify(categoria)
     });
     const resultado = await resposta.json();
     return resultado;
@@ -18,7 +18,7 @@ export async function alterarCategoria(categoria) {
         "headers": {
             "Content-Type": "application/json"
         },
-        "Body": JSON.stringify(categoria)
+        "body": JSON.stringify(categoria)
     });
     const resultado = await resposta.json();
     return resultado;
@@ -31,7 +31,7 @@ export async function excluirCategoria(categoria) {
         "headers": {
             "Content-Type": "application/json"
         },
-        "Body": JSON.stringify(categoria)
+        "body": JSON.stringify(categoria)
     });
     const resultado = await resposta.json();
     return resultado;

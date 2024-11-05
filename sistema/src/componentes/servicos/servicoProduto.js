@@ -6,7 +6,7 @@ export async function gravarProduto(produto) {
         "headers": {
             "Content-Type": "application/json"
         },
-        "Body": JSON.stringify(produto)
+        "body": JSON.stringify(produto)
     });
     const resultado = await resposta.json();
     return resultado;
@@ -18,7 +18,7 @@ export async function alterarProduto(produto) {
         "headers": {
             "Content-Type": "application/json"
         },
-        "Body": JSON.stringify(produto)
+        "body": JSON.stringify(produto)
     });
     const resultado = await resposta.json();
     return resultado;
@@ -30,7 +30,7 @@ export async function excluirProduto(produto) {
         "headers": {
             "Content-Type": "application/json"
         },
-        "Body": JSON.stringify(produto)
+        "body": JSON.stringify(produto)
     });
     const resultado = await resposta.json();
     return resultado;
