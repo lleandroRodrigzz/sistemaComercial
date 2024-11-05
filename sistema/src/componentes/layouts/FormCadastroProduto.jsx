@@ -1,7 +1,7 @@
 import { Button, Col, Form, InputGroup, Row, Spinner } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { consultarCategoria } from "../servicos/servicoCategoria.js"
-import { gravarProduto } from "../servicos/servicoProduto.js"
+import { alterarProduto, gravarProduto } from "../servicos/servicoProduto.js"
 
 import toast, { Toaster } from "react-hot-toast";
 
@@ -29,10 +29,11 @@ export default function FormCadProdutos(props) {
     }, []); //didMount
 
     function selecionarCategoria(evento) {
-        setProduto({...produto,
-                        categoria: {
-                            codigo: evento.currentTarget.value
-                        }
+        setProduto({
+            ...produto,
+            categoria: {
+                codigo: evento.currentTarget.value
+            }
         });
     }
 
@@ -43,35 +44,32 @@ export default function FormCadProdutos(props) {
             if (!props.modoEdicao) {
                 //cadastrar o produto
                 gravarProduto(produto)
-                .then((resultado) => {
-                    if (resultado.status) {
-                        //exibir tabela com o produto incluído
-                        props.setExibirTabela(true);
-                    }
-                    else {
-                        toast.error(resultado.mensagem);
-                    }
-                });
+                    .then((resultado) => {
+                        if (resultado.status) {
+                            //exibir tabela com o produto incluído
+                            props.setExibirTabela(true);
+                        }
+                        else {
+                            toast.error(resultado.mensagem);
+                        }
+                    });
             }
             else {
                 //editar o produto
-                /*altera a ordem dos registros
-                props.setListaDeProdutos([...props.listaDeProdutos.filter(
-                    (item) => {
-                        return item.codigo !== produto.codigo;
-                    }
-                ), produto]);*/
-
-                //não altera a ordem dos registros
-                props.setListaDeProdutos(props.listaDeProdutos.map((item) => {
-                    if (item.codigo !== produto.codigo)
-                        return item
-                    else
-                        return produto
-                }));
-
+                alterarProduto(produto)
+                    .then((resultado) => {
+                        if (resultado.status) {
+                            props.setListaDeProdutos(props.listaDeProdutos.map((item) => 
+                                item.codigo !== produto.codigo ? item : produto
+                            ));                            
+                        }
+                        else {
+                            toast.error(resultado.mensagem);
+                        }
+                    });
                 //voltar para o modo de inclusão
                 props.setModoEdicao(false);
+                props.setExibirTabela(true);
                 props.setProdutoSelecionado({
                     codigo: 0,
                     descricao: "",
@@ -81,9 +79,7 @@ export default function FormCadProdutos(props) {
                     urlImagem: "",
                     dataValidade: ""
                 });
-                props.setExibirTabela(true);
             }
-
         }
         else {
             setFormValidado(true);
@@ -217,7 +213,7 @@ export default function FormCadProdutos(props) {
                     <Form.Control
                         style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
                         required
-                        type="text"
+                        type="date"
                         id="dataValidade"
                         name="dataValidade"
                         value={produto.dataValidade}
@@ -229,9 +225,9 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md={5} className="mb-3">
                     <Form.Label>Categoria:</Form.Label>
                     <Form.Select id="categoria"
-                                name="categoria"
-                                style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
-                                onChange={selecionarCategoria}>
+                        name="categoria"
+                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                        onChange={selecionarCategoria}>
                         <option value="" selected disabled>Selecione uma categoria</option>
                         {
                             // Criar em tempo de execução as categorias existentes no banco de dados

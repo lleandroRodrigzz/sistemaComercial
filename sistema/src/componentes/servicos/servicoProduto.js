@@ -4,7 +4,7 @@ export async function gravarProduto(produto) {
     const resposta = await fetch(urlBase, {
         "method": "POST",
         "headers": {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json"      //Gravar Produto funcionando com o Frontend e Backend
         },
         "body": JSON.stringify(produto)
     });
@@ -13,7 +13,7 @@ export async function gravarProduto(produto) {
 }
 
 export async function alterarProduto(produto) {
-    const resposta = await fetch(urlBase, {
+    const resposta = await fetch(urlBase + "/" + produto.codigo, {
         "method": "PUT",
         "headers": {
             "Content-Type": "application/json"
@@ -24,7 +24,7 @@ export async function alterarProduto(produto) {
     return resultado;
 }
 
-export async function excluirProduto(produto) {
+export async function deletarProduto(produto) {
     const resposta = await fetch(urlBase + "/" + produto.codigo, {
         "method": "DELETE",
         "headers": {

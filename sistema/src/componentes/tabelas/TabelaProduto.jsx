@@ -1,14 +1,24 @@
 import { Button, Container, Table } from "react-bootstrap";
+import toast, { Toaster } from "react-hot-toast";
+import { deletarProduto } from "../servicos/servicoProduto.js";
+
 
 export default function TabelaProdutos(props) {
 
     function excluirProduto(produto) {
         if (window.confirm("Deseja realmente excluir o produto " + produto.descricao)) {
-            //excluir
-            props.setListaDeProdutos(props.listaDeProdutos.filter(
-                (item) => {
-                    return item.codigo !== produto.codigo;
-                }));
+            deletarProduto(produto)
+            .then((resultado) => {
+                if(resultado.status){
+                    toast.success("Produto excluido com sucesso!");
+                }
+                else{
+                    toast.error(resultado.mensagem);
+                }
+            })
+            /*props.setListaDeProdutos(
+                props.listaDeProdutos.filter((item) => item.codigo !== produto.codigo)
+            );*/
         }
     }
 
@@ -46,7 +56,7 @@ export default function TabelaProdutos(props) {
                                                             "height": "100px", 
                                                             "width": "80px" 
                                                         }} src={produto.urlImagem} alt="foto do produto" /></td>
-                                        <td>{produto.dataValidade}</td>
+                                        <td>{new Date(produto.dataValidade).toLocaleDateString('pt-BR')}</td>
                                         <td>
                                             <Button onClick={() => {
                                                 props.setExibirTabela(false);
@@ -73,6 +83,7 @@ export default function TabelaProdutos(props) {
                 </Table>
             </Container>
             Quantidade de Produtos Cadastrados: {props.listaDeProdutos.length}
+            <Toaster position="top-center" />
         </>
     );
 }
