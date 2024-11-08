@@ -32,6 +32,7 @@ export default function TabelaProdutos(props) {
                     <thead>
                         <th>Código</th>
                         <th>Descrição</th>
+                        <th>Categoria</th>
                         <th>Preço de custo</th>
                         <th>Preço de venda</th>
                         <th>Qtd. em estoque</th>
@@ -46,16 +47,17 @@ export default function TabelaProdutos(props) {
                                     <tr>
                                         <td>{produto.codigo}</td>
                                         <td>{produto.descricao}</td>
+                                        <td>{produto.categoria?.descricao || "Sem Categoria"}</td>
                                         <td>{produto.precoCusto}</td>
                                         <td>{produto.precoVenda}</td>
                                         <td>{produto.qtdEstoque}</td>
                                         <td><img style={{ 
                                                             "height": "100px", 
-                                                            "width": "80px" 
+                                                            "width": "90px" 
                                                         }} src={produto.urlImagem} alt="foto do produto" /></td>
                                         <td>{produto.dataValidade}</td>
-                                        <td>
-                                            <Button onClick={() => {
+                                        <td style={{padding: "2.5rem", display: "flex", alignItems: "center"}}>
+                                            <Button style={{marginRight:"0.5rem"}} onClick={() => {
                                                 props.setExibirTabela(false);
                                                 props.setProdutoSelecionado(produto);
                                                 props.setModoEdicao(true);
