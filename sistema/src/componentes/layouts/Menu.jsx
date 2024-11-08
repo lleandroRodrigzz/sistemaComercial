@@ -41,6 +41,7 @@ export default function Menu(props) {
                                 "logado": false
                             });
                         }}>Sair</Nav.Link>
+                        <Nav.Link style={{marginLeft:"30rem"}}>Bem-Vindo {usuario.usuario} :)</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
