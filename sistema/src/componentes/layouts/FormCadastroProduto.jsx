@@ -218,7 +218,7 @@ export default function FormCadProdutos(props) {
                         name="dataValidade"
                         value={produto.dataValidade}
                         onChange={manipularMudanca}
-                        placeholder="XX/XX/XXXX"
+                        placeholder="DD/MM/AAAA"
                     />
                     <Form.Control.Feedback type="invalid">Por favor, informe a data de validade do produto!</Form.Control.Feedback>
                 </Form.Group>
