@@ -10,6 +10,11 @@ export default function TabelaProdutos(props) {
             deletarProduto(produto)
             .then((resultado) => {
                 if(resultado.status){
+                    props.setListaDeProdutos(props.listaDeProdutos.filter(
+                        (item)=>{
+                            return item.codigo !== produto.codigo
+                        }
+                    ));
                     toast.success("Produto excluido com sucesso!");
                 }
                 else{
