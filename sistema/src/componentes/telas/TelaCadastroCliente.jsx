@@ -1,12 +1,12 @@
 import { Alert } from "react-bootstrap";
-import FormCadastroCliente from './FormCadastroCliente';
-import TabelaCliente from "../tabelas/TabelaCliente";
-import { clientes } from "../dados/mockCategorias";
-import Pagina from "./Pagina";
+import FormCadastroCliente from './formularios/FormCadastroCliente';
+import TabelaCliente from "./tabelas/TabelaCliente";
+import { clientes } from "../../dados/mockDados";
+import Pagina from "../layouts/Pagina";
 import { useState } from "react";
 
 export default function TelaCadastroCliente(props) {
-    
+
     const [exibirTabela, setExibirTabela] = useState(true);
     const [listaDeClientes, setListaDeClientes] = useState(clientes);
     const [modoEdicao, setModoEdicao] = useState(false);

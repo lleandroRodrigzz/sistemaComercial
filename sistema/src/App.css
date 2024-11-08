@@ -1,48 +1,176 @@
 /*------------------------GLOBAL----------------------*/
-*{
-    font-family: 'JetBrains Mono', monospace;
+* {
+  font-family: 'JetBrains Mono', monospace;
 }
-/*----------------------------------------------------*/
-/*------------------------BOTÃO LOGIN----------------------*/
-Button {
-    --green: rgb(27, 253, 156);
-    font-size: 15px;
-    padding: 0.7em 2.7em;
-    letter-spacing: 0.06em;
-    position: relative;
-    font-family: inherit;
-    border-radius: 0.6em;
-    overflow: hidden;
-    transition: all 0.3s;
-    line-height: 1.4em;
-    border: 2px solid var(--green);
-    background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
-    color: var(--green);
-    box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
-  }
-  
-  Button:hover {
-    color: #82ffc9;
-    box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
-  }
-  
-  Button:before {
-    content: "";
-    position: absolute;
-    left: -4em;
-    width: 4em;
-    height: 100%;
-    top: 0;
-    transition: transform .4s ease-in-out;
-    background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%,rgba(27, 253, 156, 0.1) 60% , transparent 100%);
-  }
-  
-  Button:hover:before {
-    transform: translateX(15em);
-  }
 
-  .custom-placeholder::placeholder {
-    color: #ffffff; /* Define a cor do placeholder */
-    opacity: 100%; /* Garante que a opacidade seja 100% */
+/*----------------------------------------------------*/
+
+/*------------------------BOTÃO LOGIN----------------------*/
+.login-button {
+  --green: rgb(27, 253, 156);
+  font-size: 15px;
+  padding: 0.7em 2.7em;
+  letter-spacing: 0.06em;
+  text-decoration: "none";
+  position: relative;
+  font-family: inherit;
+  border-radius: 0.6em;
+  overflow: hidden;
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%, transparent 60%, rgba(27, 253, 156, 0.1) 100%);
+  color: var(--green);
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
 }
-  /*---------------------------------------------------------*/
+
+.login-button:hover {
+  color: #82ffc9;
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
+}
+
+.login-button:before {
+  content: "";
+  position: absolute;
+  left: -4em;
+  width: 4em;
+  height: 100%;
+  top: 0;
+  transition: transform .4s ease-in-out;
+  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%, rgba(27, 253, 156, 0.1) 60%, transparent 100%);
+}
+
+.login-button:hover:before {
+  transform: translateX(15em);
+}
+
+.custom-placeholder::placeholder {
+  color: #ffffff;
+  /* Define a cor do placeholder */
+  opacity: 100%;
+  /* Garante que a opacidade seja 100% */
+}
+/*---------------------------------------------------------*/
+
+/*--------------PAGINA(Menu e Cabecalho)-------------------*/
+/* Define a cor de fundo e a cor do texto para o cabeçalho */
+.cabecalho-custom {
+  border: solid 2px !important; 
+  background-color: #000000 !important;
+  color: #1BFD9C !important;
+  border-color: var(--green) !important;
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Define a cor de fundo, a cor do texto e o espaçamento do menu */
+.navbar-custom {
+  background-color: #000000 !important;
+  color: #1BFD9C !important;
+  border: solid 2px;
+  border-radius: 10px;
+  border-color: var(--green) !important;
+  padding: 1rem;
+  margin-bottom: 5rem;
+}
+
+/* Estilo para os links de navegação */
+.navbar-custom .nav-link {
+  color: #1BFD9C !important;
+  font-size: 18px;
+  margin-right: 1rem;
+}
+
+/* Estilo dos dropdowns para harmonizar com o esquema de cores */
+.navbar-custom .dropdown-menu {
+  background-color: #212121;
+  color: #1BFD9C;
+  border: 1px solid #1BFD9C;
+}
+
+.navbar-custom .dropdown-item {
+  color: #1BFD9C;
+}
+
+.navbar-custom .dropdown-item:hover {
+  background-color: #1BFD9C;
+  color: #212121;
+}
+
+/* Estilo específico para o item "Bem-Vindo" */
+.navbar-custom .nav-link.welcome-text {
+  color: #1BFD9C !important;
+  font-size: 18px;
+  margin-left: 20rem;
+}
+
+/* Estilo do botão de sair */
+.navbar-custom .nav-link.logout {
+  color: #fc3c1b !important;
+  font-weight: bold;
+}
+
+/* Ajuste no botão de toggle para corresponder ao esquema de cores */
+.navbar-custom .navbar-toggler {
+  border-color: #1BFD9C !important;
+}
+
+.navbar-custom .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(27, 253, 156, 0.8)' stroke-width='8' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+/*---------------------------------------------------------*/
+
+/*--------------TelasDeCadastro(Prod,Categ,...)-------------------*/
+.alert-custom {
+  border: solid 2px !important; 
+  background-color: #000000 !important;
+  color: #1BFD9C !important;
+  border-color: var(--green) !important;
+  font-size: 42px;
+  text-align: center;
+}
+
+.telaCad-button {
+  --green: rgb(27, 253, 156);
+  font-size: 15px;
+  padding: 0.7em 2.7em;
+  text-decoration: "none";
+  letter-spacing: 0.06em;
+  position: relative;
+  font-family: inherit;
+  border-radius: 0.6em;
+  overflow: hidden;
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%, transparent 60%, rgba(27, 253, 156, 0.1) 100%);
+  color: var(--green);
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+}
+
+.telaCad-button:hover {
+  color: #82ffc9;
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
+}
+
+.telaCad-button:before {
+  content: "";
+  position: absolute;
+  left: -4em;
+  width: 4em;
+  height: 100%;
+  top: 0;
+  transition: transform .4s ease-in-out;
+  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%, rgba(27, 253, 156, 0.1) 60%, transparent 100%);
+}
+
+.telaCad-button:hover:before {
+  transform: translateX(15em);
+}
+
+/* Define a cor do placeholder */
+.custom-placeholder::placeholder {
+  color: #A9A9A9 !important; /* Coloque a cor desejada para o placeholder */
+  opacity: 1 !important; /* Garante que a opacidade seja 100% */
+}
+/*---------------------------------------------------------*/

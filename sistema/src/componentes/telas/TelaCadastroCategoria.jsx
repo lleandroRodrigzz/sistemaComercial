@@ -1,8 +1,8 @@
 import { Alert } from "react-bootstrap";
-import FormCadastroCategoria from "./FormCadastroCategoria";
-import TabelaCategoria from "../tabelas/TabelaCategoria";
-import { categorias } from "../dados/mockCategorias";
-import Pagina from "./Pagina";
+import FormCadastroCategoria from "./formularios/FormCadastroCategoria";
+import TabelaCategoria from "./tabelas/TabelaCategoria";
+import { categorias } from "../../dados/mockDados";
+import Pagina from "../layouts/Pagina";
 import { useState } from "react";
 
 export default function TelaCadastroCategoria(props) {

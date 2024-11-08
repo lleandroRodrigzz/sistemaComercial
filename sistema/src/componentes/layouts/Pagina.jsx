@@ -6,7 +6,7 @@ export default function Pagina(props) {
     return (
         <>
             <Container>
-                <Cabecalho titulo="Sistema de Controle Gerencial"/> 
+                <Cabecalho titulo="ACME</System>"/> 
                 {
                 //<Cabecalho titulo="Sistema de controle Gerencial"></Cabecalho>
                 }

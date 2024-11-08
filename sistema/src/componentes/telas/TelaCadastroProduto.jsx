@@ -1,9 +1,9 @@
 import { Alert } from "react-bootstrap";
-import FormCadastroProduto from "./FormCadastroProduto";
-import Pagina from "./Pagina";
+import FormCadastroProduto from "./formularios/FormCadastroProduto";
+import Pagina from "../layouts/Pagina";
 import { useEffect, useState } from "react";
-import TabelaProduto from "../tabelas/TabelaProduto";
-import { consultarProduto } from "../servicos/servicoProduto";
+import TabelaProduto from "./tabelas/TabelaProduto";
+import { consultarProduto } from "../../servicos/servicoProduto.js";
 
 export default function TelaCadastroProduto(props) {
 
@@ -30,7 +30,7 @@ export default function TelaCadastroProduto(props) {
     return (
         <div>
             <Pagina>
-                <Alert className='text-center' variant='info' style={{ fontSize: "42px" }}>
+                <Alert className='alert-custom' variant='dark'>
                     <h2>Cadastro de Produtos</h2>
                 </Alert>
                 {

@@ -1,12 +1,12 @@
 import { Alert } from "react-bootstrap";
-import FormCadastroEntregador from './FormCadastroEntregador';
-import TabelaEntregador from "../tabelas/TabelaEntregador";
-import { entregadores } from "../dados/mockCategorias";
-import Pagina from "./Pagina";
+import FormCadastroEntregador from './formularios/FormCadastroEntregador';
+import TabelaEntregador from "./tabelas/TabelaEntregador";
+import { entregadores } from "../../dados/mockDados";
+import Pagina from "../layouts/Pagina";
 import { useState } from "react";
 
 export default function TelaCadastroEntregador(props) {
-    
+
     const [exibirTabela, setExibirTabela] = useState(true);
     const [listaDeEntregadores, setListaDeEntregadores] = useState(entregadores);
     const [modoEdicao, setModoEdicao] = useState(false);
@@ -23,7 +23,7 @@ export default function TelaCadastroEntregador(props) {
     return (
         <div>
             <Pagina>
-                <Alert className='text-center' variant='dark' style={{ fontSize: "42px", borderColor:'black'}}>
+                <Alert className='text-center' variant='dark' style={{ fontSize: "42px", borderColor: 'black' }}>
                     <h2>Cadastro de Entregadores</h2>
                 </Alert>
                 {

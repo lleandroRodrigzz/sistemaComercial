@@ -1,13 +1,13 @@
-import TelaCadastroCliente from './componentes/layouts/TelaCadastroCliente';
-import TelaCadastroFornecedor from './componentes/layouts/TelaCadastroFornecedor';
-import TelaCadastroCategoria from './componentes/layouts/TelaCadastroCategoria';
-import TelaCadastroUsuario from './componentes/layouts/TelaCadastroUsuario';
-import TelaCadastroProduto from './componentes/layouts/TelaCadastroProduto';
-import TelaCadastroEntregador from './componentes/layouts/TelaCadastroEntregador';
-import TelaMenu from "./componentes/layouts/TelaMenu";
-import Tela404 from "./componentes/layouts/Tela404";
-import Sobre from './componentes/layouts/Sobre';
-import TelaLogin from './componentes/layouts/TelaLogin';
+import TelaCadastroCliente from './componentes/telas/TelaCadastroCliente';
+import TelaCadastroFornecedor from './componentes/telas/TelaCadastroFornecedor';
+import TelaCadastroCategoria from './componentes/telas/TelaCadastroCategoria';
+import TelaCadastroUsuario from './componentes/telas/TelaCadastroUsuario';
+import TelaCadastroProduto from './componentes/telas/TelaCadastroProduto';
+import TelaCadastroEntregador from './componentes/telas/TelaCadastroEntregador';
+import TelaMenu from "./componentes/telas/TelaMenu";
+import Tela404 from "./componentes/telas/Tela404";
+import Sobre from './componentes/telas/Sobre';
+import TelaLogin from './componentes/telas/TelaLogin';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import { useState, createContext } from 'react';
@@ -36,6 +36,7 @@ function App() {
             { //A ordem das rotas é importante 
             }
             <Routes>
+              <Route path="/home" element={<TelaMenu />} />
               <Route path="/cliente" element={<TelaCadastroCliente />} />
               <Route path="/fornecedor" element={<TelaCadastroFornecedor />} />
               <Route path="/produto" element={<TelaCadastroProduto />} />
@@ -43,7 +44,6 @@ function App() {
               <Route path="/categoria" element={<TelaCadastroCategoria />} />
               <Route path='/entregador' element={<TelaCadastroEntregador />} />
               <Route path='/sobre' element={<Sobre />} />
-              <Route path="/" element={<TelaMenu />} />
               <Route path="*" element={<Tela404 />} />
             </Routes>
           </BrowserRouter>

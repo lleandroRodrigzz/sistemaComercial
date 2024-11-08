@@ -1,7 +1,7 @@
 import { Button, Col, Form, InputGroup, Row, Spinner } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { consultarCategoria } from "../servicos/servicoCategoria.js"
-import { alterarProduto, gravarProduto } from "../servicos/servicoProduto.js"
+import { consultarCategoria } from "../../../servicos/servicoCategoria.js"
+import { alterarProduto, gravarProduto } from "../../../servicos/servicoProduto.js"
 
 import toast, { Toaster } from "react-hot-toast";
 
@@ -59,9 +59,9 @@ export default function FormCadProdutos(props) {
                 alterarProduto(produto)
                     .then((resultado) => {
                         if (resultado.status) {
-                            props.setListaDeProdutos(props.listaDeProdutos.map((item) => 
+                            props.setListaDeProdutos(props.listaDeProdutos.map((item) =>
                                 item.codigo !== produto.codigo ? item : produto
-                            ));                            
+                            ));
                         }
                         else {
                             toast.error(resultado.mensagem);
@@ -71,13 +71,14 @@ export default function FormCadProdutos(props) {
                 props.setModoEdicao(false);
                 props.setExibirTabela(true);
                 props.setProdutoSelecionado({
-                    codigo: 0,
+                    codigo: "",
                     descricao: "",
-                    precoCusto: 0,
-                    precoVenda: 0,
-                    qtdEstoque: 0,
+                    precoCusto: "",
+                    precoVenda: "",
+                    qtdEstoque: "",
                     urlImagem: "",
-                    dataValidade: ""
+                    dataValidade: "",
+                    categoria: {}
                 });
             }
         }
@@ -97,27 +98,28 @@ export default function FormCadProdutos(props) {
     return (
         <Form validated={formValidado} onSubmit={manipularSubmissao}>
             <Row className="mb-4">
-                <Form.Group as={Col} md="4">
-                    <Form.Label>Código</Form.Label>
+                <Form.Group as={Col} md="6">
+                    <Form.Label>Código:</Form.Label>
                     <Form.Control
-                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff" }}
+                        className="custom-placeholder"
+                        style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
                         required
                         type="text"
                         id="codigo"
                         name="codigo"
+                        disabled
                         value={produto.codigo}
                         onChange={manipularMudanca}
-                        disabled={props.modoEdicao}
-                        placeholder="Digite o codigo aqui"
+                        //disabled={props.modoEdicao}
+                        placeholder="Não precisa digitar o codigo, eu vou cuidar disso para você ;)"
                     />
                     <Form.Control.Feedback type='invalid'>Por favor, informe o código do produto!</Form.Control.Feedback>
                 </Form.Group>
-            </Row>
-            <Row className="mb-4">
-                <Form.Group as={Col} md="12">
-                    <Form.Label>Descrição</Form.Label>
+                <Form.Group as={Col} md="6">
+                    <Form.Label>Descrição:</Form.Label>
                     <Form.Control
-                        style={{ /*backgroundColor: "#f0f8ff"*/ borderColor: "#007bff", color: "#000" }}
+                        className="custom-placeholder"
+                        style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
                         required
                         type="text"
                         id="descricao"
@@ -133,9 +135,10 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4">
                     <Form.Label>Preço de Custo:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="precoCusto" style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
+                        <InputGroup.Text id="precoCusto" style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}>R$</InputGroup.Text>
                         <Form.Control
-                            style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                        className="custom-placeholder"
+                            style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
                             type="text"
                             id="precoCusto"
                             name="precoCusto"
@@ -153,9 +156,10 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4" controlId="precoVenda">
                     <Form.Label>Preço de Venda:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="precoVenda" style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>R$</InputGroup.Text>
+                        <InputGroup.Text id="precoVenda" style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}>R$</InputGroup.Text>
                         <Form.Control
-                            style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                        className="custom-placeholder"
+                            style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
                             type="text"
                             id="precoVenda"
                             name="precoVenda"
@@ -173,9 +177,10 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="4">
                     <Form.Label>Qtd em estoque:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="qtdEstoque" style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>+</InputGroup.Text>
+                        <InputGroup.Text id="qtdEstoque" style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}>+</InputGroup.Text>
                         <Form.Control
-                            style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                        className="custom-placeholder"
+                            style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
                             type="text"
                             id="qtdEstoque"
                             name="qtdEstoque"
@@ -195,7 +200,8 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="12">
                     <Form.Label>Url da imagem:</Form.Label>
                     <Form.Control
-                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                    className="custom-placeholder"
+                        style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
                         required
                         type="text"
                         id="urlImagem"
@@ -211,7 +217,8 @@ export default function FormCadProdutos(props) {
                 <Form.Group as={Col} md="6">
                     <Form.Label>Válido até:</Form.Label>
                     <Form.Control
-                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                    className="custom-placeholder"
+                        style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
                         required
                         type="text"
                         id="dataValidade"
@@ -226,7 +233,8 @@ export default function FormCadProdutos(props) {
                     <Form.Label>Categoria:</Form.Label>
                     <Form.Select id="categoria"
                         name="categoria"
-                        style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
+                        className="custom-placeholder"
+                        style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
                         onChange={selecionarCategoria}>
                         <option value="" selected disabled>Selecione uma categoria</option>
                         {
@@ -239,20 +247,20 @@ export default function FormCadProdutos(props) {
                         }
                     </Form.Select>
                 </Form.Group>
-                <Form.Group as={Col} md={1} style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}>
+                <Form.Group as={Col} md={1} style={{ backgroundColor: "#212121"}}>
                     {
-                        !temCategorias ? <Spinner className='mt-4' animation="border" variant="info" />
+                        !temCategorias ? <Spinner className='mt-4' animation="border" variant="success" />
                             : ""
                     }
                 </Form.Group>
             </Row>
             <Row className='mt-2 mb-2'>
                 <Col md={1}>
-                    <Button variant="info" type="submit" disabled={!temCategorias}>{props.modoEdicao ? "Alterar" : "Confirmar"}</Button>
+                    <Button variant="link" className='telaCad-button' type="submit" disabled={!temCategorias} style={{ textDecoration: "none", color: "#1BFD9C" }}>{props.modoEdicao ? "Alterar" : "Confirmar"}</Button>
                 </Col>
 
                 <Col md={{ offset: 1 }}>
-                    <Button variant="info" type="submit" onClick={() => {
+                    <Button variant="link" className='telaCad-button' type="submit" style={{ textDecoration: "none", color: "#1BFD9C" }} onClick={() => {
                         props.setExibirTabela(true);
                     }}>Voltar</Button>
                 </Col>

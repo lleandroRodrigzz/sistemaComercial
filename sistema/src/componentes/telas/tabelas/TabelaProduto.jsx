@@ -1,6 +1,6 @@
 import { Button, Container, Table } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-import { deletarProduto } from "../servicos/servicoProduto.js";
+import { deletarProduto } from "../../../servicos/servicoProduto";
 
 
 export default function TabelaProdutos(props) {
@@ -8,32 +8,43 @@ export default function TabelaProdutos(props) {
     function excluirProduto(produto) {
         if (window.confirm("Deseja realmente excluir o produto " + produto.descricao)) {
             deletarProduto(produto)
-            .then((resultado) => {
-                if(resultado.status){
-                    props.setListaDeProdutos(props.listaDeProdutos.filter(
-                        (item)=>{
-                            return item.codigo !== produto.codigo
-                        }
-                    ));
-                    toast.success("Produto excluido com sucesso!");
-                }
-                else{
-                    toast.error(resultado.mensagem);
-                }
-            })
+                .then((resultado) => {
+                    if (resultado.status) {
+                        props.setListaDeProdutos(props.listaDeProdutos.filter(
+                            (item) => {
+                                return item.codigo !== produto.codigo
+                            }
+                        ));
+                        toast.success("Produto excluido com sucesso!");
+                    }
+                    else {
+                        toast.error(resultado.mensagem);
+                    }
+                })
         }
     }
 
     return (
         <>
             <Container className='text-center'>
-                <Button className="mb-3" variant="info" 
+                <Button className="telaCad-button mb-2" variant="link" style={{ textDecoration: "none", color: "#1BFD9C" }}
                     onClick={() => {
+                        props.setProdutoSelecionado({
+                            codigo: "",
+                            descricao: "",
+                            precoCusto: "",
+                            precoVenda: "",
+                            qtdEstoque: "",
+                            urlImagem: "",
+                            dataValidade: "",
+                            categoria: {}
+                        });
+                        props.setModoEdicao(false);
                         props.setExibirTabela(false);
                     }}>
                     Adicionar
                 </Button>
-                <Table striped bordered hover>
+                <Table striped bordered hover variant="dark">
                     <thead>
                         <th>Código</th>
                         <th>Descrição</th>
@@ -56,13 +67,13 @@ export default function TabelaProdutos(props) {
                                         <td>{produto.precoCusto}</td>
                                         <td>{produto.precoVenda}</td>
                                         <td>{produto.qtdEstoque}</td>
-                                        <td><img style={{ 
-                                                            "height": "100px", 
-                                                            "width": "90px" 
-                                                        }} src={produto.urlImagem} alt="foto do produto" /></td>
+                                        <td><img style={{
+                                            "height": "100px",
+                                            "width": "90px"
+                                        }} src={produto.urlImagem} alt="foto do produto" /></td>
                                         <td>{produto.dataValidade}</td>
-                                        <td style={{padding: "2.5rem", display: "flex", alignItems: "center"}}>
-                                            <Button style={{marginRight:"0.5rem"}} onClick={() => {
+                                        <td style={{ padding: "2.5rem", display: "flex", alignItems: "center" }}>
+                                            <Button style={{ marginRight: "0.5rem" }} onClick={() => {
                                                 props.setExibirTabela(false);
                                                 props.setProdutoSelecionado(produto);
                                                 props.setModoEdicao(true);
@@ -86,7 +97,7 @@ export default function TabelaProdutos(props) {
                     </tbody>
                 </Table>
             </Container>
-            Quantidade de Produtos Cadastrados: {props.listaDeProdutos.length}
+            Quantidade de Produtos Cadastrados: <span style={{color:"#1BFD9C"}}>{props.listaDeProdutos.length}</span>
             <Toaster position="top-center" />
         </>
     );

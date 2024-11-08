@@ -119,7 +119,7 @@ export const usuarios = [
     }
 ];
 
-export const produtos = [
+/*export const produtos = [
     {
         "codigo": 1,
         "descricao": "Camiseta",
@@ -156,7 +156,7 @@ export const produtos = [
         "urlImagem": "https://a-static.mlcdn.com.br/800x560/notebook-acer-nitro-5-an515-58-54uh-ci5-12a-gen-windows-11-home-8gb-512gb-rtx-3050-15-6-full-hd/aceroficial/1132/d4f4a47524a6f330ce8a7fc8e2e3280d.jpeg",
         "dataValidade": "31/12/2025"
     }
-];
+];*/
 
 export const entregadores = [
     {

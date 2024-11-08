@@ -49,7 +49,7 @@ export default function TelaLogin() {
                                                                                   color: "#1BFD9C"
                                                                                 }}/>
                     </Form.Group>
-                    <Button variant="link" type="submit" style={{ textDecoration: "none", color: "#1BFD9C" }}>
+                    <Button variant="link" type="submit" className="login-button" style={{ textDecoration: "none", color: "#1BFD9C" }}>
                         Login
                     </Button>
                 </Form>
