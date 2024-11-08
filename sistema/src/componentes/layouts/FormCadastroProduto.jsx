@@ -213,7 +213,7 @@ export default function FormCadProdutos(props) {
                     <Form.Control
                         style={{ /*backgroundColor: "#f0f8ff",*/ borderColor: "#007bff", color: "#000" }}
                         required
-                        type="date"
+                        type="text"
                         id="dataValidade"
                         name="dataValidade"
                         value={produto.dataValidade}

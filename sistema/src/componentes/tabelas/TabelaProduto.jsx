@@ -16,9 +16,6 @@ export default function TabelaProdutos(props) {
                     toast.error(resultado.mensagem);
                 }
             })
-            /*props.setListaDeProdutos(
-                props.listaDeProdutos.filter((item) => item.codigo !== produto.codigo)
-            );*/
         }
     }
 
@@ -56,7 +53,7 @@ export default function TabelaProdutos(props) {
                                                             "height": "100px", 
                                                             "width": "80px" 
                                                         }} src={produto.urlImagem} alt="foto do produto" /></td>
-                                        <td>{new Date(produto.dataValidade).toLocaleDateString('pt-BR')}</td>
+                                        <td>{produto.dataValidade}</td>
                                         <td>
                                             <Button onClick={() => {
                                                 props.setExibirTabela(false);
