@@ -79,6 +79,7 @@
   color: #1BFD9C !important;
   font-size: 18px;
   margin-right: 1rem;
+  justify-content: space-evenly;
 }
 
 /* Estilo dos dropdowns para harmonizar com o esquema de cores */

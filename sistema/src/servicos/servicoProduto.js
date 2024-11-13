@@ -1,4 +1,5 @@
-const urlBase = "https://bcc-backend-lp-2-eta.vercel.app/produtos"; //Corrigido
+const urlBase = "https://bcc-backend-lp-2-eta.vercel.app/produtos"; //Online
+//const urlBase = "https://localhost:4000/produtos"                   //Local
 
 export async function gravarProduto(produto) {
     const resposta = await fetch(urlBase, {

@@ -27,7 +27,7 @@ export default function TabelaProdutos(props) {
     return (
         <>
             <Container className='text-center'>
-                <Button className="telaCad-button mb-2" variant="link" style={{ textDecoration: "none", color: "#1BFD9C" }}
+                <Button className="telaCad-button mb-3" variant="link" style={{ textDecoration: "none", color: "#1BFD9C" }}
                     onClick={() => {
                         props.setProdutoSelecionado({
                             codigo: "",
@@ -44,23 +44,23 @@ export default function TabelaProdutos(props) {
                     }}>
                     Adicionar
                 </Button>
-                <Table striped bordered hover variant="dark">
-                    <thead>
+                <Table striped bordered hover responsive variant="dark" style={{backgroundColor:"black"}}>
+                    <thead style={{textAlign:"center", verticalAlign: "middle"}}>
                         <th>Código</th>
                         <th>Descrição</th>
                         <th>Categoria</th>
-                        <th>Preço de custo</th>
-                        <th>Preço de venda</th>
-                        <th>Qtd. em estoque</th>
+                        <th>Preço Custo</th>
+                        <th>Preço Venda</th>
+                        <th>Qtd. Estoque</th>
                         <th>Imagem</th>
                         <th>Validade</th>
                         <th>Ações</th>
                     </thead>
                     <tbody>
                         {
-                            props.listaDeProdutos?.map((produto) => {
+                            props?.listaDeProdutos?.map((produto) => {
                                 return (
-                                    <tr>
+                                    <tr style={{textAlign:"center", verticalAlign: "middle"}}>
                                         <td>{produto.codigo}</td>
                                         <td>{produto.descricao}</td>
                                         <td>{produto.categoria?.descricao || "Sem Categoria"}</td>
@@ -68,11 +68,11 @@ export default function TabelaProdutos(props) {
                                         <td>{produto.precoVenda}</td>
                                         <td>{produto.qtdEstoque}</td>
                                         <td><img style={{
-                                            "height": "100px",
-                                            "width": "90px"
+                                            "height": "5rem",
+                                            "width": "5rem"
                                         }} src={produto.urlImagem} alt="foto do produto" /></td>
                                         <td>{produto.dataValidade}</td>
-                                        <td style={{ padding: "2.5rem", display: "flex", alignItems: "center" }}>
+                                        <td style={{ padding: "4rem", display: "flex", alignItems: "center" }}>
                                             <Button style={{ marginRight: "0.5rem" }} onClick={() => {
                                                 props.setExibirTabela(false);
                                                 props.setProdutoSelecionado(produto);
