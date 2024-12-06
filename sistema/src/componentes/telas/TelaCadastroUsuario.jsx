@@ -1,26 +1,34 @@
 import { Alert } from "react-bootstrap";
 import FormCadastroUsuario from "./formularios/FormCadastroUsuario";
 import TabelaUsuario from "./tabelas/TabelaUsuario";
-import { usuarios } from "../../dados/mockDados";
+//import { usuarios } from "../../dados/mockDados";
 import Pagina from "../layouts/Pagina";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { consultarUsuario } from '../../servicos/servicoUsuario'
 
 export default function TelaCadastroUsuario(props) {
+
     const [exibirTabela, setExibirTabela] = useState(true);
-    const [listaDeUsuarios, setListaDeUsuarios] = useState(usuarios);
+    const [listaDeUsuarios, setListaDeUsuarios] = useState([]);
     const [modoEdicao, setModoEdicao] = useState(false);
     const [usuarioSelecionado, setUsuarioSelecionado] = useState({
+        codigo:"",
         nomeUsuario: "",
         emailUsuario: "",
         senhaUsuario: "",
         tipoUsuario: ""
     });
 
+    useEffect(() => {
+        consultarUsuario().then((lista) => {
+            setListaDeUsuarios(lista);
+        });
+    }, []); //listaVazia -> didMount
 
     return (
         <div>
             <Pagina>
-                <Alert className='text-center' variant='success' style={{ fontSize: "42px" }}>
+                <Alert className='alert-custom' variant='dark'>
                     <h2>Cadastro de Usuarios</h2>
                 </Alert>
                 {

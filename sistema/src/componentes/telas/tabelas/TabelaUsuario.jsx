@@ -1,27 +1,39 @@
 import { Container, Button, Table } from 'react-bootstrap';
+import { deletarUsuario } from '../../../servicos/servicoUsuario';
+import toast, { Toaster } from "react-hot-toast";
 
 export default function TabelaUsuario(props) {
 
     function excluirUsuario(usuario){
-        if(window.confirm("Deseja realmente excluir o usuario " + usuario.nomeUsuario + " ?")){
-            //excluir
-            props.setListaDeUsuarios(props.listaDeUsuarios.filter(
-                (item) => {
-                    return item.emailUsuario !== usuario.emailUsuario;
-                }));
+        if (window.confirm("Deseja realmente excluir o usuario " + usuario.nomeUsuario + " ?")) {
+            deletarUsuario(usuario)
+                .then((resultado) => {
+                    if (resultado.status) {
+                        props.setListaDeUsuarios(props.listaDeUsuarios.filter(
+                            (item) => {
+                                return item.codigo !== usuario.codigo
+                            }
+                        ));
+                        toast.success("Usuario excluido com sucesso!");
+                    }
+                    else {
+                        toast.error(resultado.mensagem);
+                    }
+                })
         }
     }
 
     return (
         <>
             <Container className='text-center'>
-                <Button className='mb-3' variant='success'
-                    onClick={() => {
-                        props.setExibirTabela(false);
-                    }}>Adicionar
+                <Button className="telaCad-button mb-3" variant="link" style={{ textDecoration: "none", color: "#1BFD9C" }} 
+                        onClick={() => props.setExibirTabela(false)}
+                    >
+                    Adicionar
                 </Button>
-                <Table striped bordered hover>
-                    <thead>
+                <Table striped bordered hover responsive variant="dark" style={{backgroundColor:"black"}}>
+                    <thead style={{textAlign:"center", verticalAlign: "middle"}}>
+                        <th>ID</th>
                         <th>Nome de Usuario</th>
                         <th>Email</th>
                         <th>Senha</th>
@@ -32,10 +44,11 @@ export default function TabelaUsuario(props) {
                         {
                             props.listaDeUsuarios?.map((usuario) => {
                                 return (
-                                    <tr>
+                                    <tr key={usuario.codigo}>
+                                        <td>{usuario.codigo}</td>
                                         <td>{usuario.nomeUsuario}</td>
                                         <td>{usuario.emailUsuario}</td>
-                                        <td>{"*************"}</td>
+                                        <td>{"*********"}</td>
                                         <td>{usuario.tipoUsuario}</td>
                                         <td>
                                             <Button onClick={() => {
@@ -62,6 +75,8 @@ export default function TabelaUsuario(props) {
                     </tbody>
                 </Table>
             </Container>
+            Quantidade de Usuarios Cadastrados: <span style={{color:"#1BFD9C"}}>{props.listaDeUsuarios.length}</span>
+            <Toaster position="top-center" />
         </>
     );
 }

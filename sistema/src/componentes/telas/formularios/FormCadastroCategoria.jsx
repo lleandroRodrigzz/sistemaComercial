@@ -9,7 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 export default function FormCadastroCategoria(props) {
 
     const categoriaVazia = {
-        id: "",
+        codigo: "",
         descricao: ""
     }
 

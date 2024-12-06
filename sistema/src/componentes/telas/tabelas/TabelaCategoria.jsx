@@ -31,7 +31,7 @@ export default function TabelaCategoria(props) {
                     >
                     Adicionar
                 </Button>
-                <Table striped bordered hover responsive variant="dark" style={{backgroundColor:'black'}}>
+                <Table striped bordered hover responsive variant="dark" style={{backgroundColor:"black"}}>
                     <thead style={{textAlign:"center", verticalAlign: "middle"}}>
                         <tr>
                             <th>ID</th>
