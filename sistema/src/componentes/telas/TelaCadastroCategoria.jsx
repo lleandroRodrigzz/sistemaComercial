@@ -1,24 +1,31 @@
 import { Alert } from "react-bootstrap";
 import FormCadastroCategoria from "./formularios/FormCadastroCategoria";
 import TabelaCategoria from "./tabelas/TabelaCategoria";
-import { categorias } from "../../dados/mockDados";
+//import { categorias } from "../../dados/mockDados";
 import Pagina from "../layouts/Pagina";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { consultarCategoria } from "../../servicos/servicoCategoria";
 
 export default function TelaCadastroCategoria(props) {
+
     const [exibirTabela, setExibirTabela] = useState(true);
-    const [listaDeCategorias, setListaDeCategorias] = useState(categorias);
+    const [listaDeCategorias, setListaDeCategorias] = useState([]);
     const [modoEdicao, setModoEdicao] = useState(false);
     const [categoriaSelecionada, setCategoriaSelecionada] = useState({
-        id: "",
-        nomeCat: "",
-        tipo: ""
+        codigo: "",
+        descricao: ""
     });
+
+    useEffect(() => {
+        consultarCategoria().then((lista) => {
+            setListaDeCategorias(lista);
+        });
+    }, []); //listaVazia -> didMount
 
     return (
         <div>
             <Pagina>
-                <Alert className='text-center' variant='danger' style={{ fontSize: "42px" }}>
+                <Alert className='alert-custom' variant='dark'>
                     <h2>Cadastro de Categorias</h2>
                 </Alert>
                 {

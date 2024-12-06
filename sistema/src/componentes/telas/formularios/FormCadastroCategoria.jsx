@@ -3,13 +3,14 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { useState } from 'react';
+import { gravarCategoria, alterarCategoria } from '../../../servicos/servicoCategoria';
+import toast, { Toaster } from "react-hot-toast";
 
 export default function FormCadastroCategoria(props) {
 
     const categoriaVazia = {
         id: "",
-        nomeCat: "",
-        tipo: ""
+        descricao: ""
     }
 
     const [formValidado, setFormValidado] = useState(false);
@@ -19,17 +20,43 @@ export default function FormCadastroCategoria(props) {
     function manipularSubmissao(evento) {
         const form = evento.currentTarget;
         if (form.checkValidity()) {
+
             if (!props.modoEdicao) {
-                props.setListaDeCategorias([...props.listaDeCategorias, categoria]);
-            } else {
-                props.setListaDeCategorias([...props.listaDeCategorias.filter((item) => item.id !== categoria.id), categoria]);
-                props.setModoEdicao(false);
-                props.setCategoriaSelecionada(categoriaVazia);
+                //cadastrar a categoria
+                gravarCategoria(categoria)
+                    .then((resultado) => {
+                        if (resultado.status) {
+                            //exibir tabela com o produto incluído
+                            props.setExibirTabela(true);
+                        }
+                        else {
+                            toast.error(resultado.mensagem);
+                        }
+                    });
             }
-            props.setExibirTabela(true);
-            setCategoria(categoriaVazia);
-            setFormValidado(false);
-        } else {
+            else {
+                //editar o produto
+                alterarCategoria(categoria)
+                    .then((resultado) => {
+                        if (resultado.status) {
+                            props.setListaDeCategorias(props.listaDeCategorias.map((item) =>
+                                item.codigo !== categoria.codigo ? item : categoria
+                            ));
+                        }
+                        else {
+                            toast.error(resultado.mensagem);
+                        }
+                    });
+                //voltar para o modo de inclusão
+                props.setModoEdicao(false);
+                props.setExibirTabela(true);
+                props.setCategoriaSelecionada({
+                    codigo: "",
+                    descricao: ""
+                });
+            }
+        }
+        else {
             setFormValidado(true);
         }
         evento.preventDefault();
@@ -51,28 +78,30 @@ export default function FormCadastroCategoria(props) {
                             <fieldset disabled>
                                 <Form.Label>ID da Categoria</Form.Label>
                                 <Form.Control
-                                    style={{ borderColor: 'red', /*backgroundColor: "#95e88b"*/ }}
-                                    required
+                                    className="custom-placeholder"
+                                    style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
                                     type="number"
-                                    id='id'
-                                    name='id'
-                                    value={categoria.id}
+                                    id='codigo'
+                                    name='codigo'
+                                    disabled
+                                    value={categoria.codigo}
                                     onChange={manipularMudanca}
-                                    placeholder="Digite o ID da categoria"
+                                    placeholder="Não precisa digitar o ID, eu vou cuidar disso para você ;)"
                                 />
                                 <Form.Control.Feedback>Correto!</Form.Control.Feedback>
                             </fieldset> :
                             <>
                                 <Form.Label>ID da Categoria</Form.Label>
                                 <Form.Control
-                                    style={{ borderColor: 'red', /*backgroundColor: "#95e88b"*/ }}
-                                    required
+                                    className="custom-placeholder"
+                                    style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
                                     type="number"
-                                    id='id'
-                                    name='id'
-                                    value={categoria.id}
+                                    id='codigo'
+                                    name='codigo'
+                                    disabled
+                                    value={categoria.codigo}
                                     onChange={manipularMudanca}
-                                    placeholder="Digite o ID da categoria"
+                                    placeholder="Não precisa digitar o ID, eu vou cuidar disso para você ;)"
                                 />
                                 <Form.Control.Feedback>Correto!</Form.Control.Feedback>
                             </>
@@ -81,55 +110,35 @@ export default function FormCadastroCategoria(props) {
                 <Form.Group as={Col} md="6">
                     <Form.Label>Nome da Categoria</Form.Label>
                     <Form.Control
-                        style={{ borderColor: 'red', /*backgroundColor: "#95e88b"*/ }}
+                        style={{ backgroundColor: "#000000", borderColor: "#1BFD9C", color:"white" }}
+                        className="custom-placeholder"
                         required
                         type="text"
-                        id='nomeCat'
-                        name='nomeCat'
-                        value={categoria.nomeCat}
+                        id='descricao'
+                        name='descricao'
+                        value={categoria.descricao}
                         onChange={manipularMudanca}
                         placeholder="Digite o nome da categoria aqui"
                     />
                     <Form.Control.Feedback>Correto!</Form.Control.Feedback>
                 </Form.Group>
             </Row>
-            <Row className="mb-3">
-                <Form.Group as={Col} md="6">
-                    <Form.Label>Tipo de Categoria</Form.Label>
-                    <Form.Select
-                        style={{ borderColor: 'red', /*backgroundColor: "#95e88b"*/ }}
-                        id='tipo'
-                        name='tipo'
-                        value={categoria.tipo}
-                        onChange={manipularMudanca}
-                        required
-                        placeholder="Escolha a categoria"
-                    >
-                        <option disabled selected value="">Selecione o Tipo de Categoria</option>
-                        <option value="Alimenticio">Alimenticio</option>
-                        <option value="Mecanico">Mecanico</option>
-                        <option value="Tecnologia">Tecnologia</option>
-                        <option value="Educação">Educação</option>
-                        <option value="Vestuario">Vestuario</option>
-                    </Form.Select>
-                    <Form.Control.Feedback type="invalid">Selecione um tipo de categoria válido.</Form.Control.Feedback>
-                </Form.Group>
-            </Row>
             <Row className="mt-2 mb-2">
                 <Col md={1}>
-                    <Button variant="danger" type="submit">
+                    <Button variant="link" style={{ textDecoration: "none", color: "#1BFD9C" }} className='telaCad-button' type="submit">
                         {props.modoEdicao ? "Alterar" : "Cadastrar"}
                     </Button>
                 </Col>
 
                 <Col md={{ offset: 1 }}>
-                    <Button variant="danger" type="button" onClick={() => {
+                    <Button variant="link" style={{ textDecoration: "none", color: "#1BFD9C" }} className='telaCad-button' type="button" onClick={() => {
                         props.setExibirTabela(true);
                         props.setModoEdicao(false);
                         props.setCategoriaSelecionada(categoriaVazia);
                     }}>Voltar</Button>
                 </Col>
             </Row>
+            <Toaster position="top-center" />
         </Form>
     );
 }

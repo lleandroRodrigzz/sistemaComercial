@@ -1,30 +1,25 @@
-export const categorias = [
+/*export const categorias = [
     {
         "id": 1,
-        "nomeCat": "Carnes",
-        "tipo": "Alimenticio"
+        "nomeCat": "Carnes"
     },
     {
         "id": 2,
-        "nomeCat": "Camiseta",
-        "tipo": "Vestuario"
+        "nomeCat": "Camiseta"
     },
     {
         "id": 3,
-        "nomeCat": "Eletrônicos",
-        "tipo": "Tecnologia"
+        "nomeCat": "Eletrônicos"
     },
     {
         "id": 4,
-        "nomeCat": "Livros",
-        "tipo": "Educação"
+        "nomeCat": "Livros"
     },
     {
         "id": 5,
-        "nomeCat": "Serviços Mecânicos",
-        "tipo": "Mecânico"
+        "nomeCat": "Serviços Mecânicos"
     }
-];
+];*/
 
 export const clientes = [
     {

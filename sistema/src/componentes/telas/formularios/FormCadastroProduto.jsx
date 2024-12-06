@@ -2,7 +2,6 @@ import { Button, Col, Form, InputGroup, Row, Spinner } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { consultarCategoria } from "../../../servicos/servicoCategoria.js"
 import { alterarProduto, gravarProduto } from "../../../servicos/servicoProduto.js"
-
 import toast, { Toaster } from "react-hot-toast";
 
 export default function FormCadProdutos(props) {
@@ -110,7 +109,6 @@ export default function FormCadProdutos(props) {
                         disabled
                         value={produto.codigo}
                         onChange={manipularMudanca}
-                        //disabled={props.modoEdicao}
                         placeholder="Não precisa digitar o codigo, eu vou cuidar disso para você ;)"
                     />
                     <Form.Control.Feedback type='invalid'>Por favor, informe o código do produto!</Form.Control.Feedback>
@@ -256,7 +254,11 @@ export default function FormCadProdutos(props) {
             </Row>
             <Row className='mt-2 mb-2'>
                 <Col md={1}>
-                    <Button variant="link" className='telaCad-button' type="submit" disabled={!temCategorias} style={{ textDecoration: "none", color: "#1BFD9C" }}>{props.modoEdicao ? "Alterar" : "Confirmar"}</Button>
+                    <Button variant="link" className='telaCad-button' type="submit" 
+                            disabled={!temCategorias} 
+                            style={{ textDecoration: "none", color: "#1BFD9C" }}>
+                                {props.modoEdicao ? "Alterar" : "Confirmar"}
+                    </Button>
                 </Col>
 
                 <Col md={{ offset: 1 }}>

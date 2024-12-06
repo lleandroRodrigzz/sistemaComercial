@@ -6,7 +6,7 @@ import { deletarProduto } from "../../../servicos/servicoProduto";
 export default function TabelaProdutos(props) {
 
     function excluirProduto(produto) {
-        if (window.confirm("Deseja realmente excluir o produto " + produto.descricao)) {
+        if (window.confirm("Deseja realmente excluir o produto " + produto.descricao + " ?")) {
             deletarProduto(produto)
                 .then((resultado) => {
                     if (resultado.status) {
